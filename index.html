@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Aura & Bean — Artisanal Specialty Coffeehouse</title>
+  <meta name="description" content="Artisanal specialty coffee roastery and mindful cafe in Sonipat, Haryana. Single-origin micro-lots, slow pour-overs, hand-laminated pastries, and quiet architectural warmth."/>
+  
+  <!-- Favicon icon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+
+  <!-- Google Fonts: Playfair Display + Plus Jakarta Sans + Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#1A1816",           // Deep dark roast background/text
+            background: "#F9F6F0",        // Warm cream background
+            cream: {
+              50: "#FCFAF6",
+              100: "#F9F6F0",
+              200: "#F2EDE3",
+              300: "#E8E0D2",
+              400: "#DCD0BD"
+            },
+            terracotta: {
+              DEFAULT: "#C86D51",         // Accent terracotta/rust
+              hover: "#B2583E",
+              light: "#FBF0EB",
+              container: "#FE997A"
+            },
+            sage: {
+              DEFAULT: "#879A78",         // Soft sage green for subtle badges
+              light: "#EFF3ED",
+              dark: "#4B5F3E"
+            },
+            surface: {
+              DEFAULT: "#FFFFFF",
+              warm: "#F5F1E9",
+              muted: "#EBE5DB"
+            },
+            card: "#FFFFFF",
+            borderMuted: "#E8E2D8"
+          },
+          fontFamily: {
+            serif: ["'Playfair Display'", "Georgia", "serif"],
+            sans: ["'Plus Jakarta Sans'", "system-ui", "sans-serif"]
+          },
+          borderRadius: {
+            'card': '16px',
+            'badge': '9999px',
+            'btn': '12px'
+          },
+          boxShadow: {
+            'subtle': '0 2px 12px -2px rgba(26, 24, 22, 0.05)',
+            'elevated': '0 12px 32px -4px rgba(26, 24, 22, 0.08), 0 4px 12px -2px rgba(26, 24, 22, 0.04)',
+            'glow-terracotta': '0 0 24px -4px rgba(200, 109, 81, 0.35)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Custom Scrollbar & Utility Smoothing */
+    html {
+      scroll-padding-top: 5rem;
+    }
+    body {
+      background-color: #F9F6F0;
+      color: #1A1816;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    ::selection {
+      background-color: #C86D51;
+      color: #FFFFFF;
+    }
+    /* Hide scrollbars for clean tab overflow */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Glassmorphism */
+    .glass-header {
+      background-color: rgba(249, 246, 240, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232, 226, 216, 0.7);
+    }
+    /* Material symbol helper */
+    .icon-fill {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Transition utils */
+    .menu-item-transition {
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes pulse-soft {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.85; }
+    }
+    .animate-pulse-soft {
+      animation: pulse-soft 3s infinite ease-in-out;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-primary antialiased selection:bg-terracotta selection:text-white relative">
+
+  <!-- ========================================================================= -->
+  <!-- 1. NAVIGATION BAR (Sticky Glassmorphic + Mobile Off-Canvas Drawer) -->
+  <!-- ========================================================================= -->
+  <header class="fixed top-0 left-0 w-full z-40 glass-header transition-all duration-300 shadow-subtle" id="main-header">
+    <div class="max-w-[1360px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Logo + Live Operational Status Badge -->
+      <div class="flex items-center gap-6">
+        <a href="#" class="flex items-center gap-3 group" aria-label="Aura & Bean Home">
+          <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
+            <!-- Artisanal Coffee Bean & Steam SVG -->
+            <svg class="w-6 h-6 text-terracotta-container" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+              <line x1="6" y1="1" x2="6" y2="4"></line>
+              <line x1="10" y1="1" x2="10" y2="4"></line>
+              <line x1="14" y1="1" x2="14" y2="4"></line>
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-2xl font-bold tracking-tight text-primary leading-none">Aura &amp; Bean</span>
+            <span class="text-[10px] uppercase tracking-widest text-primary/60 font-medium mt-1">Artisanal Specialty Roastery</span>
+          </div>
+        </a>
+
+        <!-- Live Operating Hours Badge (Calculated in JS) -->
+        <div class="hidden md:flex items-center gap-2 pl-4 border-l border-borderMuted">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sage opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-sage"></span>
+          </span>
+          <span class="text-xs font-medium uppercase tracking-wider text-primary/75" id="nav-live-status">Open • Closes at 9 PM</span>
+        </div>
+      </div>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-8" id="desktop-nav">
+        <a href="#menu" class="text-sm font-medium text-primary/80 hover:text-terracotta transition-colors duration-200">Menu</a>
+        <a href="#our-story" class="text-sm font-medium text-primary/80 hover:text-terracotta transition-colors duration-200">Our Story</a>
+        <a href="#atmosphere" class="text-sm font-medium text-primary/80 hover:text-terracotta transition-colors duration-200">Atmosphere</a>
+        <a href="#reviews" class="text-sm font-medium text-primary/80 hover:text-terracotta transition-colors duration-200">Reviews</a>
+        <a href="#location" class="text-sm font-medium text-primary/80 hover:text-terracotta transition-colors duration-200">Location</a>
+        <a href="#contact" class="text-sm font-medium text-primary/80 hover:text-terracotta transition-colors duration-200">Contact</a>
+      </nav>
+
+      <!-- Header Action Elements: Cart Trigger, Reserve CTA & Mobile Toggle -->
+      <div class="flex items-center gap-3.5">
+        
+        <!-- Cart Drawer Button -->
+        <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-xl bg-white border border-borderMuted hover:border-terracotta/40 hover:bg-cream-50 text-primary transition-all duration-200 shadow-sm flex items-center justify-center group" aria-label="View Shopping Cart">
+          <span class="material-symbols-outlined text-[20px] group-hover:text-terracotta transition-colors">local_mall</span>
+          <span id="nav-cart-badge" class="absolute -top-1.5 -right-1.5 h-5 min-w-[20px] px-1 rounded-full bg-terracotta text-white text-[11px] font-bold flex items-center justify-center transition-transform duration-200">0</span>
+        </button>
+
+        <!-- Reserve Table CTA Button -->
+        <button onclick="openReserveModal()" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-btn bg-terracotta text-white text-sm font-semibold hover:bg-terracotta-hover transition-all duration-200 shadow-sm hover:shadow-glow-terracotta hover:scale-[1.02] active:scale-[0.98]">
+          <span class="material-symbols-outlined text-[17px]">calendar_today</span>
+          <span>Reserve a Table</span>
+        </button>
+
+        <!-- Mobile Hamburger Button -->
+        <button onclick="toggleMobileNav()" class="lg:hidden p-2.5 rounded-xl bg-white border border-borderMuted text-primary hover:text-terracotta focus:outline-none transition-colors" aria-label="Toggle mobile menu" id="mobile-toggle-btn">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Off-Canvas Drawer Menu -->
+  <div id="mobile-nav-backdrop" class="fixed inset-0 z-50 bg-primary/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden" onclick="toggleMobileNav()"></div>
+  <div id="mobile-nav-panel" class="fixed top-0 right-0 z-50 w-4/5 max-w-sm h-full bg-cream-50 p-6 shadow-2xl translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col justify-between">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-borderMuted">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white">
+            <span class="material-symbols-outlined text-[20px] text-terracotta-container">coffee</span>
+          </div>
+          <span class="font-serif text-xl font-bold text-primary">Aura &amp; Bean</span>
+        </div>
+        <button onclick="toggleMobileNav()" class="p-2 rounded-full hover:bg-cream-200 text-primary transition-colors" aria-label="Close menu">
+          <span class="material-symbols-outlined text-[22px]">close</span>
+        </button>
+      </div>
+
+      <!-- Live badge inside mobile drawer -->
+      <div class="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sage-light text-sage-dark text-xs font-semibold">
+        <span class="w-2 h-2 rounded-full bg-sage animate-ping"></span>
+        <span id="mobile-live-status">Open Today • 7 AM – 9 PM</span>
+      </div>
+
+      <!-- Links -->
+      <nav class="flex flex-col gap-4 mt-6">
+        <a href="#menu" onclick="toggleMobileNav()" class="text-base font-semibold text-primary hover:text-terracotta py-2 border-b border-borderMuted/40 flex items-center justify-between">
+          <span>Curated Menu</span>
+          <span class="material-symbols-outlined text-sm text-primary/40">arrow_forward_ios</span>
+        </a>
+        <a href="#our-story" onclick="toggleMobileNav()" class="text-base font-semibold text-primary hover:text-terracotta py-2 border-b border-borderMuted/40 flex items-center justify-between">
+          <span>Our Craft &amp; Story</span>
+          <span class="material-symbols-outlined text-sm text-primary/40">arrow_forward_ios</span>
+        </a>
+        <a href="#atmosphere" onclick="toggleMobileNav()" class="text-base font-semibold text-primary hover:text-terracotta py-2 border-b border-borderMuted/40 flex items-center justify-between">
+          <span>Atmosphere &amp; Space</span>
+          <span class="material-symbols-outlined text-sm text-primary/40">arrow_forward_ios</span>
+        </a>
+        <a href="#reviews" onclick="toggleMobileNav()" class="text-base font-semibold text-primary hover:text-terracotta py-2 border-b border-borderMuted/40 flex items-center justify-between">
+          <span>Patron Reviews</span>
+          <span class="material-symbols-outlined text-sm text-primary/40">arrow_forward_ios</span>
+        </a>
+        <a href="#location" onclick="toggleMobileNav()" class="text-base font-semibold text-primary hover:text-terracotta py-2 border-b border-borderMuted/40 flex items-center justify-between">
+          <span>Location &amp; Hours</span>
+          <span class="material-symbols-outlined text-sm text-primary/40">arrow_forward_ios</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Mobile Drawer Bottom CTA -->
+    <div class="pt-6 border-t border-borderMuted space-y-3">
+      <button onclick="toggleMobileNav(); openReserveModal();" class="w-full py-3.5 rounded-btn bg-terracotta text-white font-semibold text-sm hover:bg-terracotta-hover transition-colors shadow-sm flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+        <span>Reserve a Table</span>
+      </button>
+      <div class="text-center text-xs text-primary/60">
+        Plot 42, Sector 14, Sonipat, Haryana
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- 2. HERO SECTION (Full-Viewport Immersive Editorial) -->
+  <!-- ========================================================================= -->
+  <section class="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-primary pt-20">
+    <!-- Cinematic High-Definition Background Visual -->
+    <div class="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-1000 scale-105 hover:scale-100" 
+         style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDM_CsoPnc3o1GqAAtGoMCeNOWTuWBANmPpgGGd1ViPQlh6NgA6PQ0QS0E4TmUx-_A6dBJ89wyFb6-fnT5dKMvtUOpbfawJEWhVUcX3OXVDJf5WyHVRLU8N2yiQZE97eHiB_mOhtdeTwqjee-7TzY6oJmOrKbwsQrVaBhriNIRZ-NzdKgNyp1u-zAaa7wamG27BtGv-ilgz8qxis_mryog1vPi_spoB1nppjm__0O0');">
+    </div>
+
+    <!-- Cinematic Vignette & Deep Gradients for High Readability -->
+    <div class="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/60 to-primary/75 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/85 via-transparent to-primary/80"></div>
+    <div class="absolute inset-0 bg-radial-gradient from-transparent via-primary/30 to-primary/90"></div>
+
+    <!-- Content Container -->
+    <div class="relative z-10 max-w-[1360px] mx-auto px-6 lg:px-10 py-24 w-full flex flex-col items-center text-center">
+      
+      <!-- Micro-Badges -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-6 animate-pulse-soft">
+        <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/15 text-xs uppercase tracking-widest font-semibold shadow-sm">
+          <span class="material-symbols-outlined text-[15px] text-terracotta-container">eco</span>
+          Ethically Sourced • 100% Arabica
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/15 text-xs uppercase tracking-widest font-semibold shadow-sm">
+          <span class="material-symbols-outlined text-[15px] text-terracotta-container">local_fire_department</span>
+          Micro-Batch Roastery
+        </span>
+      </div>
+
+      <!-- Main Headline Hierarchy -->
+      <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white max-w-4xl tracking-tight leading-[1.08] mb-6 drop-shadow-md">
+        Where Every Cup <br/>
+        <span class="italic font-normal text-terracotta-container font-serif">Tells a Story</span>
+      </h1>
+
+      <!-- Editorial Subtext -->
+      <p class="text-base sm:text-lg md:text-xl text-cream-200 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+        Single-origin micro-lots ethically curated from mist-covered highlands, masterfully roasted in small batches and extracted for the mindful palate.
+      </p>
+
+      <!-- Dual CTAs -->
+      <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+        <a href="#menu" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-btn bg-terracotta text-white font-semibold text-base shadow-elevated hover:bg-terracotta-hover hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
+          <span>Explore Menu</span>
+          <span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+        </a>
+        <button onclick="openReserveModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-btn bg-white/15 backdrop-blur-md text-white border border-white/20 font-semibold text-base hover:bg-white/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shadow-sm">
+          <span class="material-symbols-outlined text-[18px] text-terracotta-container">calendar_today</span>
+          <span>Book a Table</span>
+        </button>
+      </div>
+
+      <!-- Sensorial Indicator Badges at Hero Base -->
+      <div class="mt-16 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-cream-300 text-xs sm:text-sm uppercase tracking-wider">
+        <div class="flex items-center justify-center gap-2.5">
+          <span class="material-symbols-outlined text-[20px] text-terracotta-container">water_drop</span>
+          <span class="font-medium">Slow Manual Brews &amp; V60</span>
+        </div>
+        <div class="flex items-center justify-center gap-2.5">
+          <span class="material-symbols-outlined text-[20px] text-terracotta-container">bakery_dining</span>
+          <span class="font-medium">Hand-Laminated Pastries</span>
+        </div>
+        <div class="flex items-center justify-center gap-2.5">
+          <span class="material-symbols-outlined text-[20px] text-terracotta-container">hotel_class</span>
+          <span class="font-medium">SCA 88+ Cupping Score</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 3. INTERACTIVE MENU SECTION (Tabbed Category Filter + Dietary Tags) -->
+  <!-- ========================================================================= -->
+  <section class="w-full py-28 bg-background scroll-mt-20" id="menu">
+    <div class="max-w-[1360px] mx-auto px-6 lg:px-10">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div class="space-y-3">
+          <span class="text-xs uppercase tracking-widest text-terracotta font-bold">Curated Offerings</span>
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-primary font-bold tracking-tight">Crafted for the Connoisseur</h2>
+        </div>
+        <p class="text-sm sm:text-base text-primary/70 max-w-md leading-relaxed">
+          Every harvest is roasted in-house in microscopic batches to preserve native floral and fruity terroir. Paired with slow sourdough ferments.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs Bar -->
+      <div class="flex flex-wrap items-center gap-2.5 pb-2 mb-10 overflow-x-auto no-scrollbar" id="menu-filter-bar">
+        <button onclick="filterMenu('all', this)" class="menu-filter-btn px-6 py-2.5 rounded-full bg-primary text-white text-sm font-semibold shadow-sm transition-all whitespace-nowrap active-category">
+          All Offerings
+        </button>
+        <button onclick="filterMenu('coffee', this)" class="menu-filter-btn px-6 py-2.5 rounded-full bg-white border border-borderMuted text-primary/80 text-sm font-semibold hover:border-terracotta/40 hover:text-primary transition-all whitespace-nowrap">
+          Specialty Coffee
+        </button>
+        <button onclick="filterMenu('tea', this)" class="menu-filter-btn px-6 py-2.5 rounded-full bg-white border border-borderMuted text-primary/80 text-sm font-semibold hover:border-terracotta/40 hover:text-primary transition-all whitespace-nowrap">
+          Artisanal Teas
+        </button>
+        <button onclick="filterMenu('pastry', this)" class="menu-filter-btn px-6 py-2.5 rounded-full bg-white border border-borderMuted text-primary/80 text-sm font-semibold hover:border-terracotta/40 hover:text-primary transition-all whitespace-nowrap">
+          Fresh Pastries
+        </button>
+        <button onclick="filterMenu('brunch', this)" class="menu-filter-btn px-6 py-2.5 rounded-full bg-white border border-borderMuted text-primary/80 text-sm font-semibold hover:border-terracotta/40 hover:text-primary transition-all whitespace-nowrap">
+          Breakfast / Brunch
+        </button>
+      </div>
+
+      <!-- Dietary Quick Filter Pills -->
+      <div class="flex items-center gap-2 mb-8 text-xs text-primary/60">
+        <span class="font-medium">Filter by preference:</span>
+        <button onclick="filterDietary('all')" class="dietary-filter-pill px-3 py-1 rounded-full bg-primary/10 text-primary font-medium hover:bg-primary/20 transition-colors" data-diet="all">All</button>
+        <button onclick="filterDietary('Organic')" class="dietary-filter-pill px-3 py-1 rounded-full bg-sage-light text-sage-dark font-medium hover:opacity-80 transition-colors" data-diet="Organic">🌱 Organic</button>
+        <button onclick="filterDietary('Vegan')" class="dietary-filter-pill px-3 py-1 rounded-full bg-terracotta-light text-terracotta font-medium hover:opacity-80 transition-colors" data-diet="Vegan">🥑 Vegan Option</button>
+        <button onclick="filterDietary('Gluten-Free')" class="dietary-filter-pill px-3 py-1 rounded-full bg-cream-200 text-primary/80 font-medium hover:opacity-80 transition-colors" data-diet="Gluten-Free">🌾 Gluten-Free</button>
+      </div>
+
+      <!-- Menu Items Grid (12 Items Across Categories) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="menu-grid">
+        
+        <!-- Item 1: Ethiopian Yirgacheffe Pour-Over -->
+        <article class="menu-item-card group flex flex-col justify-between bg-card rounded-card p-5 border border-borderMuted shadow-subtle hover:shadow-elevated hover:border-terracotta/50 transition-all duration-300" data-category="coffee" data-diet="Organic,Single Origin">
+          <div class="space-y-4">
+            <div class="relative h-52 w-full rounded-xl overflow-hidden bg-cream-200 cursor-pointer" onclick="openItemQuickView('Ethiopian Yirgacheffe Pour-Over', '$6.50', 'Floral jasmine, delicate bergamot, candied peach aroma, crisp citrus finish.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuBUYtEwWaDOhTog9g_MRouTGr4GNNvh_nq0fJCNkO9_QXgpnJx0yyJhcnu42U2iqszHMKo87OCOx08HlhJQ0sRi2gJrTfAFXghus6VBH8-XsVX537JGfWDVKnJwZn38X8taKjhaeVWA8zxeKvv41ZJ8YuQ3eUgdQbP2kg1iJmcanXXDQ6FrZ7l_3YyHJzS4N-ClpSZRwATw1EOuWeSPP9VvvD_7kkM_ivkChuqXQCE', 'V60 Slow Drip', 'Guji Highland, 2100m', ['Organic', 'Single Origin'])">
+              <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Ethiopian Yirgacheffe Pour-Over" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUYtEwWaDOhTog9g_MRouTGr4GNNvh_nq0fJCNkO9_QXgpnJx0yyJhcnu42U2iqszHMKo87OCOx08HlhJQ0sRi2gJrTfAFXghus6VBH8-XsVX537JGfWDVKnJwZn38X8taKjhaeVWA8zxeKvv41ZJ8YuQ3eUgdQbP2kg1iJmcanXXDQ6FrZ7l_3YyHJzS4N-ClpSZRwATw1EOuWeSPP9VvvD_7kkM_ivkChuqXQCE" loading="lazy"/>
+              <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-terracotta shadow-sm">$6.50</span>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+                <span class="px-2.5 py-0.5 rounded-full bg-sage-light text-sage-dark text-[11px] font-semibold">Organic</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-cream-200 text-primary/75 text-[11px] font-semibold">Single Origin</span>
+              </div>
+              <h3 class="font-serif text-lg font-bold text-primary group-hover:text-terracotta transition-colors">Ethiopian Yirgacheffe Pour-Over</h3>
+              <p class="text-xs text-primary/70 mt-1.5 leading-relaxed">Floral jasmine, delicate bergamot, candied peach aroma, crisp citrus finish.</p>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-borderMuted/60 flex items-center justify-between">
+            <span class="text-xs font-medium text-primary/60">V60 • Slow Drip</span>
+            <button onclick="addToCart('Ethiopian Yirgacheffe Pour-Over', 6.50)" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cream-100 hover:bg-terracotta hover:text-white text-primary text-xs font-semibold transition-all duration-200">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>Add to Order</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Item 2: Smoked Cardamom Cortado -->
+        <article class="menu-item-card group flex flex-col justify-between bg-card rounded-card p-5 border border-borderMuted shadow-subtle hover:shadow-elevated hover:border-terracotta/50 transition-all duration-300" data-category="coffee" data-diet="Vegan">
+          <div class="space-y-4">
+            <div class="relative h-52 w-full rounded-xl overflow-hidden bg-cream-200 cursor-pointer" onclick="openItemQuickView('Smoked Cardamom Cortado', '$5.25', 'Double espresso shot, steamed velvety oat milk, freshly cracked smoked cardamom.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuB-CtrZz1e5eMJE0Y7LQDou0VnAFeD0fkY4opxDtgzd0KbIib8FmWgGsDzjYAxbwpyPZxJsgE2pw33EG4_IhGGi8oXVc7yHNDQg-dvAhPrfUSi9WC4b7R5lwUsTxuh1fzmujzTnRDjELHqytmS7AcBfklUrwdr74blYXeDE9vLAvWvv1hG-5p6aKN0oC55ql0rvx796hrw7aYgHuA3mTaUzcIXnopgh_Ds3MmMTiWE', '1:1 Espresso to Milk', 'Colombia Huila Blend', ['Vegan'])">
+              <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Smoked Cardamom Cortado" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-CtrZz1e5eMJE0Y7LQDou0VnAFeD0fkY4opxDtgzd0KbIib8FmWgGsDzjYAxbwpyPZxJsgE2pw33EG4_IhGGi8oXVc7yHNDQg-dvAhPrfUSi9WC4b7R5lwUsTxuh1fzmujzTnRDjELHqytmS7AcBfklUrwdr74blYXeDE9vLAvWvv1hG-5p6aKN0oC55ql0rvx796hrw7aYgHuA3mTaUzcIXnopgh_Ds3MmMTiWE" loading="lazy"/>
+              <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-terracotta shadow-sm">$5.25</span>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+                <span class="px-2.5 py-0.5 rounded-full bg-terracotta-light text-terracotta text-[11px] font-semibold">Vegan Option</span>
+              </div>
+              <h3 class="font-serif text-lg font-bold text-primary group-hover:text-terracotta transition-colors">Smoked Cardamom Cortado</h3>
+              <p class="text-xs text-primary/70 mt-1.5 leading-relaxed">Double espresso shot, steamed velvety oat milk, freshly cracked smoked cardamom.</p>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-borderMuted/60 flex items-center justify-between">
+            <span class="text-xs font-medium text-primary/60">1:1 Ratio</span>
+            <button onclick="addToCart('Smoked Cardamom Cortado', 5.25)" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cream-100 hover:bg-terracotta hover:text-white text-primary text-xs font-semibold transition-all duration-200">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>Add to Order</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Item 3: Kyoto Slow Drip Cold Brew -->
+        <article class="menu-item-card group flex flex-col justify-between bg-card rounded-card p-5 border border-borderMuted shadow-subtle hover:shadow-elevated hover:border-terracotta/50 transition-all duration-300" data-category="coffee" data-diet="Organic">
+          <div class="space-y-4">
+            <div class="relative h-52 w-full rounded-xl overflow-hidden bg-cream-200 cursor-pointer" onclick="openItemQuickView('Kyoto Slow Drip Cold Brew', '$6.75', '12-hour chilled tower extraction, notes of dark cacao nibs, velvety whiskey undertones.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuB6sYK7iPtwNN7TDqDNHKZvS1NJOIRJwRcPfRYYZ4s3Sl5f8ASXeu8eeXGOozNhRYFTa8VPFwlJacUPeQz7PlSK2k6K8Iaywy_waWa8T5n1sFQHJDDdhMiQy9UuPzRFDHsHkbTJRzqYM5YwEZ_7ih9-_djg6l4GdvoM8Gc3zYj5Yu1z0dvl4l-V5WbGZwepJAR1Gy3oJm_UQgH9wn0ov4a_u-LoxiOuJ9KGiLyVecw', '12-Hour Tower Drip', 'Guatemala Antigua', ['Organic'])">
+              <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Kyoto Slow Drip Cold Brew" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6sYK7iPtwNN7TDqDNHKZvS1NJOIRJwRcPfRYYZ4s3Sl5f8ASXeu8eeXGOozNhRYFTa8VPFwlJacUPeQz7PlSK2k6K8Iaywy_waWa8T5n1sFQHJDDdhMiQy9UuPzRFDHsHkbTJRzqYM5YwEZ_7ih9-_djg6l4GdvoM8Gc3zYj5Yu1z0dvl4l-V5WbGZwepJAR1Gy3oJm_UQgH9wn0ov4a_u-LoxiOuJ9KGiLyVecw" loading="lazy"/>
+              <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-terracotta shadow-sm">$6.75</span>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+                <span class="px-2.5 py-0.5 rounded-full bg-sage-light text-sage-dark text-[11px] font-semibold">Organic</span>
+              </div>
+              <h3 class="font-serif text-lg font-bold text-primary group-hover:text-terracotta transition-colors">Kyoto Slow Drip Cold Brew</h3>
+              <p class="text-xs text-primary/70 mt-1.5 leading-relaxed">12-hour chilled tower extraction, notes of dark cacao nibs, velvety whiskey undertones.</p>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-borderMuted/60 flex items-center justify-between">
+            <span class="text-xs font-medium text-primary/60">12hr Extraction</span>
+            <button onclick="addToCart('Kyoto Slow Drip Cold Brew', 6.75)" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cream-100 hover:bg-terracotta hover:text-white text-primary text-xs font-semibold transition-all duration-200">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>Add to Order</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Item 4: Ceremonial Matcha Cloud -->
+        <article class="menu-item-card group flex flex-col justify-between bg-card rounded-card p-5 border border-borderMuted shadow-subtle hover:shadow-elevated hover:border-terracotta/50 transition-all duration-300" data-category="tea" data-diet="Gluten-Free,Organic">
+          <div class="space-y-4">
+            <div class="relative h-52 w-full rounded-xl overflow-hidden bg-cream-200 cursor-pointer" onclick="openItemQuickView('Ceremonial Matcha Cloud', '$6.00', 'First-harvest Uji matcha, whipped wild vanilla cold foam, unrefined floral honey.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuBrBXu8bfQxmKKG_4MqJUhdQ2b2RgqG5dIN8ZQnd3UCXhbBqRm5O9m7P8QX2I-lNlu78vDP4QYUCZO7GJDOuYZHvAHaBmpd9RoVGWR1RtH5LNasCHjzFZmTY81FQ-Rw8SwgkfR2Rq0V-azaJXjSGWnUo-MwIybO_mHpDdrpihKFHAinr5tkMSfmmSBVui-h626Dk7UR-xGPyKzCJq2F-k1gNhOWSA3zJK2TBMj0VYU', 'Hand Chasen Whisked', 'Uji, Kyoto Harvest', ['Gluten-Free', 'Organic'])">
+              <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Ceremonial Matcha Cloud" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrBXu8bfQxmKKG_4MqJUhdQ2b2RgqG5dIN8ZQnd3UCXhbBqRm5O9m7P8QX2I-lNlu78vDP4QYUCZO7GJDOuYZHvAHaBmpd9RoVGWR1RtH5LNasCHjzFZmTY81FQ-Rw8SwgkfR2Rq0V-azaJXjSGWnUo-MwIybO_mHpDdrpihKFHAinr5tkMSfmmSBVui-h626Dk7UR-xGPyKzCJq2F-k1gNhOWSA3zJK2TBMj0VYU" loading="lazy"/>
+              <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-terracotta shadow-sm">$6.00</span>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+                <span class="px-2.5 py-0.5 rounded-full bg-cream-200 text-primary/75 text-[11px] font-semibold">Gluten-Free</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-sage-light text-sage-dark text-[11px] font-semibold">Organic</span>
+              </div>
+              <h3 class="font-serif text-lg font-bold text-primary group-hover:text-terracotta transition-colors">Ceremonial Matcha Cloud</h3>
+              <p class="text-xs text-primary/70 mt-1.5 leading-relaxed">First-harvest Uji matcha, whipped wild vanilla cold foam, unrefined floral honey.</p>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-borderMuted/60 flex items-center justify-between">
+            <span class="text-xs font-medium text-primary/60">Uji, Kyoto</span>
+            <button onclick="addToCart('Ceremonial Matcha Cloud', 6.00)" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cream-100 hover:bg-terracotta hover:text-white text-primary text-xs font-semibold transition-all duration-200">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>Add to Order</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Item 5: Orange Blossom Sourdough Brioche -->
+        <article class="menu-item-card group flex flex-col justify-between bg-card rounded-card p-5 border border-borderMuted shadow-subtle hover:shadow-elevated hover:border-terracotta/50 transition-all duration-300" data-category="pastry" data-diet="Vegetarian">
+          <div class="space-y-4">
+            <div class="relative h-52 w-full rounded-xl overflow-hidden bg-cream-200 cursor-pointer" onclick="openItemQuickView('Orange Blossom Sourdough Brioche', '$4.75', 'Hand-laminated 48-hour fermented brioche, Sicilian citrus glaze, wild mountain honey.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuDPzNqYNm2-49DBLwSEaH-jz2Akx2sXzUgG6stlCG0u3mfl_Je6cl5iP02Ejbxdv7AT-tgp6OX_RWsqN5t9VbLdArI7oo7k3z6ZJcJApbIshaEFwQB1f5P74KRM2CTMPSbx-0u-rnA8zpwyyMRBbc1hElayos02yPX-GUG9StE0vbhJPZMf1hZyGK3xZNSXvG6kfG6nmMzJCwj3V9Qu2VSTBcyD4kFJ7BNVOkE42WE', 'Wild Yeast Ferment', 'House Bakery', ['Vegetarian'])">
+              <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Orange Blossom Sourdough Brioche" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPzNqYNm2-49DBLwSEaH-jz2Akx2sXzUgG6stlCG0u3mfl_Je6cl5iP02Ejbxdv7AT-tgp6OX_RWsqN5t9VbLdArI7oo7k3z6ZJcJApbIshaEFwQB1f5P74KRM2CTMPSbx-0u-rnA8zpwyyMRBbc1hElayos02yPX-GUG9StE0vbhJPZMf1hZyGK3xZNSXvG6kfG6nmMzJCwj3V9Qu2VSTBcyD4kFJ7BNVOkE42WE" loading="lazy"/>
+              <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-terracotta shadow-sm">$4.75</span>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+                <span class="px-2.5 py-0.5 rounded-full bg-cream-200 text-primary/75 text-[11px] font-semibold">Vegetarian</span>
+              </div>
+              <h3 class="font-serif text-lg font-bold text-primary group-hover:text-terracotta transition-colors">Orange Blossom Sourdough Brioche</h3>
+              <p class="text-xs text-primary/70 mt-1.5 leading-relaxed">Hand-laminated 48-hour fermented brioche, Sicilian citrus glaze, wild mountain honey.</p>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-borderMuted/60 flex items-center justify-between">
+            <span class="text-xs font-medium text-primary/60">Baked at 6 AM</span>
+            <button onclick="addToCart('Orange Blossom Sourdough Brioche', 4.75)" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cream-100 hover:bg-terracotta hover:text-white text-primary text-xs font-semibold transition-all duration-200">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>Add to Order</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Item 6: Pistachio Rose Cruffin -->
+        <article class="menu-item-card group flex flex-col justify-between bg-card rounded-card p-5 border border-borderMuted shadow-subtle hover:shadow-elevated hover:border-terracotta/50 transition-all duration-300" data-category="pastry" data-diet="Vegetarian">
+          <div class="space-y-4">
+            <div class="relative h-52 w-full rounded-xl overflow-hidden bg-cream-200 cursor-pointer" onclick="openItemQuickView('Pistachio Rose Cruffin', '$5.50', 'Flaky croissant layers piped with stone-ground Bronte pistachio cream and Damask rose water.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuBu_NhggAsS-xhuLeYWSUcDRTu5Jp73W-V7OqGErBr-q5DhMsHi3lG9KB8VOEB-83A6Ato2lfSB4Ilw1whxmXrC1LU3xX-DYXwWRURJ5viX0ocBrIT6AKwmxwRj95F6ZSSKRehPK702bQPLKyYyQKoPZDhh3-OwLoUVcnR7T8e6VgWVrVdMnQfg1Zj6p2fT2wBwl7mehhOIr1DsG9m2mcykA_tHyiAVYCpnOH_BR8Q', 'Hand Laminated', 'Bronte Pistachio', ['Vegetarian'])">
+              <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Pistachio Rose Cruffin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu_NhggAsS-xhuLeYWSUcDRTu5Jp73W-V7OqGErBr-q5DhMsHi3lG9KB8VOEB-83A6Ato2lfSB4Ilw1whxmXrC1LU3xX-DYXwWRURJ5viX0ocBrIT6AKwmxwRj95F6ZSSKRehPK702bQPLKyYyQKoPZDhh3-OwLoUVcnR7T8e6VgWVrVdMnQfg1Zj6p2fT2wBwl7mehhOIr1DsG9m2mcykA_tHyiAVYCpnOH_BR8Q" loading="lazy"/>
+              <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-terracotta shadow-sm">$5.50</span>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+                <span class="px-2.5 py-0.5 rounded-full bg-cream-200 text-primary/75 text-[11px] font-semibold">Vegetarian</span>
+              </div>
+              <h3 class="font-serif text-lg font-bold text-primary group-hover:text-terracotta transition-colors">Pistachio Rose Cruffin</h3>
+              <p class="text-xs text-primary/70 mt-1.5 leading-relaxed">Flaky croissant layers piped with stone-ground Bronte pistachio cream and Damask rose water.</p>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-borderMuted/60 flex items-center justify-between">
+            <span class="text-xs font-medium text-primary/60">Artisanal Bake</span>
+            <button onclick="addToCart('Pistachio Rose Cruffin', 5.50)" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cream-100 hover:bg-terracotta hover:text-white text-primary text-xs font-semibold transition-all duration-200">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>Add to Order</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Item 7: Truffled Wild Mushroom Tartine -->
+        <article class="menu-item-card group flex flex-col justify-between bg-card rounded-card p-5 border border-borderMuted shadow-subtle hover:shadow-elevated hover:border-terracotta/50 transition-all duration-300" data-category="brunch" data-diet="Vegetarian">
+          <div class="space-y-4">
+            <div class="relative h-52 w-full rounded-xl overflow-hidden bg-cream-200 cursor-pointer" onclick="openItemQuickView('Truffled Wild Mushroom Tartine', '$12.50', 'Charred artisanal country loaf, whipped chevre, forest foraged mushrooms, organic runny egg.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuAoQMfM4uJgHYhrxSs-OFRrKRJj_IYU4jjTXvKw6uFkbgksME9bswAhqycx5Lz2MXVHLU2ZQHLOYtNod72xBMqEHTIO5ev1SOR3zbVyppND-dsek8FjHW82Cqgzmd25QUEOcdg-9pMch6DdNytKtBIID3xYRK_C0wHobV_7f6lHPdM2BIID3Eb53ZMPB4p1wbvqU3mKbeuWEl610jkhufQxPOutJ1jvwd_GJYqax3Y', 'Warm Kitchen', 'Local Foraged', ['Vegetarian'])">
+              <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Truffled Wild Mushroom Tartine" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoQMfM4uJgHYhrxSs-OFRrKRJj_IYU4jjTXvKw6uFkbgksME9bswAhqycx5Lz2MXVHLU2ZQHLOYtNod72xBMqEHTIO5ev1SOR3zbVyppND-dsek8FjHW82Cqgzmd25QUEOcdg-9pMch6DdNytKtBIID3xYRK_C0wHobV_7f6lHPdM2BIID3Eb53ZMPB4p1wbvqU3mKbeuWEl610jkhufQxPOutJ1jvwd_GJYqax3Y" loading="lazy"/>
+              <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-terracotta shadow-sm">$12.50</span>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+                <span class="px-2.5 py-0.5 rounded-full bg-cream-200 text-primary/75 text-[11px] font-semibold">Vegetarian</span>
+              </div>
+              <h3 class="font-serif text-lg font-bold text-primary group-hover:text-terracotta transition-colors">Truffled Wild Mushroom Tartine</h3>
+              <p class="text-xs text-primary/70 mt-1.5 leading-relaxed">Charred artisanal country loaf, whipped chevre, forest foraged mushrooms, organic runny egg.</p>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-borderMuted/60 flex items-center justify-between">
+            <span class="text-xs font-medium text-primary/60">Warm Kitchen</span>
+            <button onclick="addToCart('Truffled Wild Mushroom Tartine', 12.50)" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cream-100 hover:bg-terracotta hover:text-white text-primary text-xs font-semibold transition-all duration-200">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>Add to Order</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Item 8: Avocado & Citrus Labneh Toast -->
+        <article class="menu-item-card group flex flex-col justify-between bg-card rounded-card p-5 border border-borderMuted shadow-subtle hover:shadow-elevated hover:border-terracotta/50 transition-all duration-300" data-category="brunch" data-diet="Vegan">
+          <div class="space-y-4">
+            <div class="relative h-52 w-full rounded-xl overflow-hidden bg-cream-200 cursor-pointer" onclick="openItemQuickView('Avocado & Citrus Labneh Toast', '$11.00', 'Toasted seeded loaf, lemon-whipped labneh, Hass avocado, pickled shallot, Aleppo pepper.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuCk9CPBaNQyAEtbZbEUoZpVdxo9mYjCcvEyUsXPqycQFh0KnuuyJplW-MSk7JqdqHeQJivsWGAZgT-80nEpGohiMRr_Bohea9TpcFAPsxlQ-Y2kncjAGbyrN9As1FjZ7gvQU0udlF6iGZkkVkyjZyLbTzdLRZ0GYHAvkpIF1-ulc-OVAoiUevK3PqmkXB5q62UzZsnQ3E3mqpnx7fWWuzZO4BUmrOo6oc4jkCJxqAs', 'Seeded Sourdough', 'Fresh Produce', ['Vegan'])">
+              <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Avocado & Citrus Labneh Toast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk9CPBaNQyAEtbZbEUoZpVdxo9mYjCcvEyUsXPqycQFh0KnuuyJplW-MSk7JqdqHeQJivsWGAZgT-80nEpGohiMRr_Bohea9TpcFAPsxlQ-Y2kncjAGbyrN9As1FjZ7gvQU0udlF6iGZkkVkyjZyLbTzdLRZ0GYHAvkpIF1-ulc-OVAoiUevK3PqmkXB5q62UzZsnQ3E3mqpnx7fWWuzZO4BUmrOo6oc4jkCJxqAs" loading="lazy"/>
+              <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-terracotta shadow-sm">$11.00</span>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+                <span class="px-2.5 py-0.5 rounded-full bg-terracotta-light text-terracotta text-[11px] font-semibold">Vegan Option</span>
+              </div>
+              <h3 class="font-serif text-lg font-bold text-primary group-hover:text-terracotta transition-colors">Avocado &amp; Citrus Labneh Toast</h3>
+              <p class="text-xs text-primary/70 mt-1.5 leading-relaxed">Toasted seeded loaf, lemon-whipped labneh, Hass avocado, pickled shallot, Aleppo pepper.</p>
+            </div>
+          </div>
+          <div class="pt-4 mt-4 border-t border-borderMuted/60 flex items-center justify-between">
+            <span class="text-xs font-medium text-primary/60">Warm Kitchen</span>
+            <button onclick="addToCart('Avocado & Citrus Labneh Toast', 11.00)" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cream-100 hover:bg-terracotta hover:text-white text-primary text-xs font-semibold transition-all duration-200">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>Add to Order</span>
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 4. STORY SECTION ("Our Craft & Beans") -->
+  <!-- ========================================================================= -->
+  <section class="w-full py-28 bg-cream-100 border-y border-borderMuted/80" id="our-story">
+    <div class="max-w-[1360px] mx-auto px-6 lg:px-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        
+        <!-- Left Column: Editorial Philosophy & Roaster Quote -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cream-200 text-primary/80 text-xs font-semibold uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-terracotta"></span>
+            Terroir, Craft &amp; Sincerity
+          </div>
+          
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-primary font-bold leading-tight">
+            We view coffee not as a commodity, but as a botanical ritual.
+          </h2>
+          
+          <p class="text-base sm:text-lg text-primary/75 leading-relaxed font-light">
+            Our beans originate from hyper-specific micro-climates in Huila (Colombia) and the high volcanic ridges of Guji (Ethiopia). Working strictly in direct trade relationships, we compensate farming collectives up to 300% above standard Fair Trade minimums.
+          </p>
+          
+          <p class="text-sm sm:text-base text-primary/70 leading-relaxed">
+            Back inside our roastery, we apply sensory thermodynamic curves—preserving volatile esters rather than masking bean flaws behind carbonized heat. The result in your cup is crisp, sweet, expressive coffee that honours every hand in its journey.
+          </p>
+
+          <!-- Quote Callout Card -->
+          <div class="p-6 rounded-card bg-white border border-borderMuted shadow-subtle flex items-start gap-4">
+            <span class="material-symbols-outlined text-[36px] text-terracotta shrink-0">format_quote</span>
+            <div>
+              <p class="font-serif text-lg italic text-primary leading-relaxed mb-2">
+                "The quiet magic occurs when time slows down to match the speed of boiling water through crushed seed."
+              </p>
+              <span class="text-xs uppercase tracking-wider text-primary/60 font-semibold">— Elias Vane, Head Roaster</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Metrics Grid + Roast Profile Philosophy -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="grid grid-cols-2 gap-4">
+            
+            <div class="bg-white p-7 rounded-card border border-borderMuted shadow-subtle hover:border-terracotta/40 transition-colors space-y-2">
+              <span class="font-serif text-4xl sm:text-5xl text-terracotta font-bold block">100%</span>
+              <span class="text-xs uppercase tracking-wider text-primary font-bold block">Direct &amp; Fair Trade</span>
+              <p class="text-xs text-primary/65 leading-relaxed">Traceable to the specific grower plot, altitude, and harvest lot date.</p>
+            </div>
+
+            <div class="bg-white p-7 rounded-card border border-borderMuted shadow-subtle hover:border-terracotta/40 transition-colors space-y-2">
+              <span class="font-serif text-4xl sm:text-5xl text-terracotta font-bold block">88+</span>
+              <span class="text-xs uppercase tracking-wider text-primary font-bold block">SCA Cupping Minimum</span>
+              <p class="text-xs text-primary/65 leading-relaxed">Only elite specialty-grade beans enter our cast iron roasting drums.</p>
+            </div>
+
+            <div class="bg-white p-7 rounded-card border border-borderMuted shadow-subtle hover:border-terracotta/40 transition-colors space-y-2">
+              <span class="font-serif text-4xl sm:text-5xl text-terracotta font-bold block">3</span>
+              <span class="text-xs uppercase tracking-wider text-primary font-bold block">Seasonal Rotations</span>
+              <p class="text-xs text-primary/65 leading-relaxed">Fresh seasonal harvests synchronized strictly with origin pickings.</p>
+            </div>
+
+            <div class="bg-white p-7 rounded-card border border-borderMuted shadow-subtle hover:border-terracotta/40 transition-colors space-y-2">
+              <span class="font-serif text-4xl sm:text-5xl text-sage font-bold block">Zero</span>
+              <span class="text-xs uppercase tracking-wider text-primary font-bold block">Net Carbon Roastery</span>
+              <p class="text-xs text-primary/65 leading-relaxed">Eco-recirculating burners, solar drying, and compostable chaff reuse.</p>
+            </div>
+
+          </div>
+
+          <!-- Interactive Roast Range Scale Card -->
+          <div class="bg-white p-6 rounded-card border border-borderMuted shadow-subtle space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-primary">Roast Profile Spectrum</span>
+              <span class="text-xs font-semibold text-terracotta" id="roast-profile-label">Aura Nordic-Light Sweetspot</span>
+            </div>
+
+            <!-- Visual Bar -->
+            <div class="relative w-full h-3.5 bg-cream-200 rounded-full overflow-hidden">
+              <div id="roast-progress-bar" class="absolute left-0 top-0 h-full w-[45%] bg-terracotta rounded-full transition-all duration-500"></div>
+            </div>
+
+            <!-- Clickable Spectrum Steps -->
+            <div class="grid grid-cols-4 gap-2 text-center text-xs">
+              <button onclick="setRoastProfile(25, 'Light (Jasmine & Bergamot Notes)')" class="py-1 px-2 rounded hover:bg-cream-100 text-primary/70 transition-colors">Light</button>
+              <button onclick="setRoastProfile(45, 'Aura Nordic-Light Sweetspot')" class="py-1 px-2 rounded bg-terracotta-light text-terracotta font-bold transition-colors">Sweetspot</button>
+              <button onclick="setRoastProfile(70, 'Medium (Honeycomb & Toasted Pecan)')" class="py-1 px-2 rounded hover:bg-cream-100 text-primary/70 transition-colors">Medium</button>
+              <button onclick="setRoastProfile(95, 'Dark (Dark Cacao & Velvet Smoke)')" class="py-1 px-2 rounded hover:bg-cream-100 text-primary/70 transition-colors">Dark</button>
+            </div>
+            
+            <p id="roast-description" class="text-xs text-primary/60 italic text-center">
+              Gentle heat development preserves delicate floral terpenes, Meyer lemon brightness, and wild wildflower honey sweetness.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 5. ATMOSPHERE & GALLERY (Asymmetric Bento Grid + Lightbox) -->
+  <!-- ========================================================================= -->
+  <section class="w-full py-28 bg-background" id="atmosphere">
+    <div class="max-w-[1360px] mx-auto px-6 lg:px-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <span class="text-xs uppercase tracking-widest text-terracotta font-bold">Sanctuary Architecture</span>
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-primary font-bold tracking-tight">Architectural Warmth &amp; Calm</h2>
+        <p class="text-sm sm:text-base text-primary/70">
+          Built with reclaimed wood, warm limestone textures, and acoustic quietude. Designed for slow sips, contemplative reading, and deep conversations.
+        </p>
+      </div>
+
+      <!-- Asymmetric Bento Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+        
+        <!-- Bento Card 1: Large Interior (7 cols) -->
+        <div class="lg:col-span-7 relative h-96 md:h-[460px] rounded-3xl overflow-hidden shadow-subtle group cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/aida-public/AB6AXuAj3PYRRR29YpcLintbVYRTI4iKB5mC6n-gssLnRlUoS_FR3U7H1cXU4c6cK1Ri5oJTo2MuTQfxXWtxjaG9_fXCiKNHo9uTHuawNYH9zBrF4XJeHbglIYLOzi58q7idocDMSs1Svf0gJXp0OLVkXWNFtK-IeqyQP3wqaKStBHSi2od77OvDOsL--baw5xvNBEUP4pJ0x85Ue8T4AC-LMeNmJB84qmnQK4h6oSIwuvI', 'Warm Oak & Diffused Sunlight', 'Spacious communal harvest tables fitted with concealed soft charging docks and curated library selections.')">
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Minimalist Scandinavian cafe interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj3PYRRR29YpcLintbVYRTI4iKB5mC6n-gssLnRlUoS_FR3U7H1cXU4c6cK1Ri5oJTo2MuTQfxXWtxjaG9_fXCiKNHo9uTHuawNYH9zBrF4XJeHbglIYLOzi58q7idocDMSs1Svf0gJXp0OLVkXWNFtK-IeqyQP3wqaKStBHSi2od77OvDOsL--baw5xvNBEUP4pJ0x85Ue8T4AC-LMeNmJB84qmnQK4h6oSIwuvI" loading="lazy"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/30 to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6 text-white">
+            <span class="text-xs uppercase tracking-wider text-terracotta-container font-semibold block mb-1">Communal Spaces</span>
+            <h3 class="font-serif text-2xl font-bold">Warm Oak &amp; Diffused Sunlight</h3>
+            <p class="text-xs text-cream-200 max-w-md mt-1 font-light">Spacious communal harvest tables fitted with concealed soft charging docks and curated library selections.</p>
+          </div>
+          <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+            <span class="material-symbols-outlined text-[20px]">zoom_in</span>
+          </div>
+        </div>
+
+        <!-- Bento Card 2: Precision Microfoam (5 cols) -->
+        <div class="lg:col-span-5 relative h-96 md:h-[460px] rounded-3xl overflow-hidden shadow-subtle group cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/aida-public/AB6AXuBxek6Wd4A_vovy_HvHJr19lM-AVw-aqluz9-T0nEbiPLN2qaTYJrWfudBiEO1FSScN9NS2Lv0V1V5zbcZVC2jdrFzWF-aSNWEt3Zwfr0HaVqVLu00hlbOQsskUxiKIAm334781LoVi5eW4WHE4Yc82qiQFnSQb8C6orWXlC7ZRs4Ooi7djdcdYtKpDv63T3WMNMxWcu2WyUt1LLWyZS680yDy0De4PBKxmNBSCqJU', 'Microfoam Precision', '65-degree milk temperature perfection for maximum natural dairy sweetness and delicate pouring.')">
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Latte art pour" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxek6Wd4A_vovy_HvHJr19lM-AVw-aqluz9-T0nEbiPLN2qaTYJrWfudBiEO1FSScN9NS2Lv0V1V5zbcZVC2jdrFzWF-aSNWEt3Zwfr0HaVqVLu00hlbOQsskUxiKIAm334781LoVi5eW4WHE4Yc82qiQFnSQb8C6orWXlC7ZRs4Ooi7djdcdYtKpDv63T3WMNMxWcu2WyUt1LLWyZS680yDy0De4PBKxmNBSCqJU" loading="lazy"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/30 to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6 text-white">
+            <span class="text-xs uppercase tracking-wider text-terracotta-container font-semibold block mb-1">Barista Craft</span>
+            <h3 class="font-serif text-2xl font-bold">Microfoam Precision</h3>
+            <p class="text-xs text-cream-200 max-w-sm mt-1 font-light">65-degree milk temperature perfection for maximum natural dairy sweetness.</p>
+          </div>
+          <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+            <span class="material-symbols-outlined text-[20px]">zoom_in</span>
+          </div>
+        </div>
+
+        <!-- Bento Card 3: The Roasting Lab (4 cols) -->
+        <div class="lg:col-span-4 relative h-80 rounded-3xl overflow-hidden shadow-subtle group cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/aida-public/AB6AXuAIx7_JUfEPQm7nVu6jLyNPPoZh8Ms9LXWEryU76N_NT7hLxsrqU13j_iH5BgM_95Z0meLjFeqwJutEZC1A5LLkJ0hdG2CNfLsigrpDiJrkciD72pH7lCgbu-doyYKBZtek1clx5k79tk0vjYkA02AerdLecCU0dh4Rd7iF5FFPnLmYcVSQj5jE3wZnjIsAVw0mLFvAUSfpt0Eb3DoVivhgPJ_0f4J6kJbghfzHriY', 'The Cast Iron Drum', 'Vintage Diedrich roaster where beans are batch-roasted twice weekly in full view of visitors.')">
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Cast iron coffee roaster" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIx7_JUfEPQm7nVu6jLyNPPoZh8Ms9LXWEryU76N_NT7hLxsrqU13j_iH5BgM_95Z0meLjFeqwJutEZC1A5LLkJ0hdG2CNfLsigrpDiJrkciD72pH7lCgbu-doyYKBZtek1clx5k79tk0vjYkA02AerdLecCU0dh4Rd7iF5FFPnLmYcVSQj5jE3wZnjIsAVw0mLFvAUSfpt0Eb3DoVivhgPJ_0f4J6kJbghfzHriY" loading="lazy"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/30 to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6 text-white">
+            <span class="text-xs uppercase tracking-wider text-terracotta-container font-semibold block mb-1">Roasting Lab</span>
+            <h3 class="font-serif text-xl font-bold">The Cast Iron Drum</h3>
+            <p class="text-xs text-cream-200 mt-1 font-light">Roasted live twice weekly in full view of guests.</p>
+          </div>
+          <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+            <span class="material-symbols-outlined text-[20px]">zoom_in</span>
+          </div>
+        </div>
+
+        <!-- Bento Card 4: The Reading Nook (4 cols) -->
+        <div class="lg:col-span-4 relative h-80 rounded-3xl overflow-hidden shadow-subtle group cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/aida-public/AB6AXuAaO7tTWNbfBydB9QBLyI8U_mPuQrt5X2T-Xx00NT58SpUfIvaeiA017X8S31aWJc1uLJuCHTCUx45Dj-aOXpjFOl_BWUBr8f0UosFKcykqYEs4v0r3RUT_RFnx6jvqISKlh-7P7nNIjzIOok6JYbrzFTN43e2h-J5qyU-lVi_7neTRS3hS3C5LdwijzRg5wcQDXjFsGcYHLgoJoPIcKb5mir--TFHsZO8k8LtqFhA', 'The Quiet Corner', 'Cozy reading nook with cushioned linen armchair, warm reading lamp, and curated philosophy books.')">
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Cozy cafe reading nook" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaO7tTWNbfBydB9QBLyI8U_mPuQrt5X2T-Xx00NT58SpUfIvaeiA017X8S31aWJc1uLJuCHTCUx45Dj-aOXpjFOl_BWUBr8f0UosFKcykqYEs4v0r3RUT_RFnx6jvqISKlh-7P7nNIjzIOok6JYbrzFTN43e2h-J5qyU-lVi_7neTRS3hS3C5LdwijzRg5wcQDXjFsGcYHLgoJoPIcKb5mir--TFHsZO8k8LtqFhA" loading="lazy"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/30 to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6 text-white">
+            <span class="text-xs uppercase tracking-wider text-terracotta-container font-semibold block mb-1">Mindful Moments</span>
+            <h3 class="font-serif text-xl font-bold">The Quiet Corner</h3>
+            <p class="text-xs text-cream-200 mt-1 font-light">An acoustic sanctuary for slow contemplation and journaling.</p>
+          </div>
+          <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+            <span class="material-symbols-outlined text-[20px]">zoom_in</span>
+          </div>
+        </div>
+
+        <!-- Bento Card 5: Community Cupping (4 cols) -->
+        <div class="lg:col-span-4 relative h-80 rounded-3xl overflow-hidden shadow-subtle group cursor-pointer" onclick="openLightbox('https://lh3.googleusercontent.com/aida-public/AB6AXuCK8Hbecersv2-GV_2GchIzovBKYbR0Wft0WGoTZKex1OHp2EoSBqss3aE-f0n1p1qIjfJio6mDg7rbb2JdTN879AOnSyd0hEpQHHn0nu3LefIKUmcGjexCNhdzl9hrQqZXBPJ3VewnCHqnEzEBIRHJ5NKqeNXJT-i1K029ZajxlrpVwdiMDQdDH9Ytsl-jqINP_va3_S1J56aZ7fhWE5QZo1VR-ZqhfHjZzKQIBKo', 'Weekend Cuppings', 'Free public tasting workshops every Saturday morning with our sensory head roaster.')">
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Coffee cupping community workshop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK8Hbecersv2-GV_2GchIzovBKYbR0Wft0WGoTZKex1OHp2EoSBqss3aE-f0n1p1qIjfJio6mDg7rbb2JdTN879AOnSyd0hEpQHHn0nu3LefIKUmcGjexCNhdzl9hrQqZXBPJ3VewnCHqnEzEBIRHJ5NKqeNXJT-i1K029ZajxlrpVwdiMDQdDH9Ytsl-jqINP_va3_S1J56aZ7fhWE5QZo1VR-ZqhfHjZzKQIBKo" loading="lazy"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/30 to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6 text-white">
+            <span class="text-xs uppercase tracking-wider text-terracotta-container font-semibold block mb-1">Community</span>
+            <h3 class="font-serif text-xl font-bold">Weekend Cuppings</h3>
+            <p class="text-xs text-cream-200 mt-1 font-light">Free public tasting workshops every Saturday morning at 10 AM.</p>
+          </div>
+          <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+            <span class="material-symbols-outlined text-[20px]">zoom_in</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 6. CUSTOMER REVIEWS (Interactive Card Carousel) -->
+  <!-- ========================================================================= -->
+  <section class="w-full py-28 bg-cream-100 border-t border-borderMuted/80 overflow-hidden" id="reviews">
+    <div class="max-w-[1360px] mx-auto px-6 lg:px-10">
+      
+      <!-- Carousel Header with Prev/Next Controls -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div class="space-y-3">
+          <span class="text-xs uppercase tracking-widest text-terracotta font-bold">Voices of Our Guests</span>
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-primary font-bold tracking-tight">Warm Words &amp; Lingering Memories</h2>
+        </div>
+        
+        <div class="flex items-center gap-6">
+          <!-- Rating Summary -->
+          <div class="flex items-center gap-2">
+            <div class="flex text-terracotta">
+              <span class="material-symbols-outlined text-[20px] icon-fill">star</span>
+              <span class="material-symbols-outlined text-[20px] icon-fill">star</span>
+              <span class="material-symbols-outlined text-[20px] icon-fill">star</span>
+              <span class="material-symbols-outlined text-[20px] icon-fill">star</span>
+              <span class="material-symbols-outlined text-[20px] icon-fill">star</span>
+            </div>
+            <span class="text-sm font-bold text-primary">4.9 / 5.0 (340+ verified patrons)</span>
+          </div>
+
+          <!-- Carousel Arrow Buttons -->
+          <div class="flex items-center gap-2">
+            <button onclick="prevReview()" class="p-2.5 rounded-full bg-white border border-borderMuted text-primary hover:border-terracotta hover:text-terracotta transition-colors shadow-sm" aria-label="Previous review">
+              <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+            </button>
+            <button onclick="nextReview()" class="p-2.5 rounded-full bg-white border border-borderMuted text-primary hover:border-terracotta hover:text-terracotta transition-colors shadow-sm" aria-label="Next review">
+              <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousel Track Container -->
+      <div class="relative overflow-hidden" id="carousel-wrapper" onmouseenter="pauseReviewAutoPlay()" onmouseleave="startReviewAutoPlay()">
+        <div class="flex transition-transform duration-500 ease-out gap-6" id="reviews-track">
+          
+          <!-- Review 1 -->
+          <div class="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 p-8 rounded-card bg-white border border-borderMuted shadow-subtle flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="flex text-terracotta">
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+              </div>
+              <p class="text-sm text-primary/80 italic leading-relaxed">
+                "The Ethiopian Yirgacheffe pour-over here redefined coffee for me. Notes of jasmine and peach are so prominent you don't even need sugar. It feels like an art gallery with the warmth of a countryside cabin."
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 border-t border-borderMuted/40">
+              <div class="w-11 h-11 rounded-full bg-terracotta-light text-terracotta flex items-center justify-center font-serif text-lg font-bold">
+                A
+              </div>
+              <div>
+                <span class="text-sm font-bold text-primary block">Aarav Malhotra</span>
+                <span class="text-xs text-primary/60">Architecture Student, Ashoka</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 p-8 rounded-card bg-white border border-borderMuted shadow-subtle flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="flex text-terracotta">
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+              </div>
+              <p class="text-sm text-primary/80 italic leading-relaxed">
+                "The Truffled Wild Mushroom Tartine paired with their smoked cardamom cortado is my sacred Saturday morning reward. Best sourdough crumb in the state, hands down."
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 border-t border-borderMuted/40">
+              <div class="w-11 h-11 rounded-full bg-sage-light text-sage-dark flex items-center justify-center font-serif text-lg font-bold">
+                N
+              </div>
+              <div>
+                <span class="text-sm font-bold text-primary block">Niharika Sen</span>
+                <span class="text-xs text-primary/60">Editorial Director</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 p-8 rounded-card bg-white border border-borderMuted shadow-subtle flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="flex text-terracotta">
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+              </div>
+              <p class="text-sm text-primary/80 italic leading-relaxed">
+                "Staff members take time to describe extraction notes and bean provenance without any pretension. The Kyoto cold brew alone justifies making a pilgrimage here every week."
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 border-t border-borderMuted/40">
+              <div class="w-11 h-11 rounded-full bg-primary text-white flex items-center justify-center font-serif text-lg font-bold">
+                D
+              </div>
+              <div>
+                <span class="text-sm font-bold text-primary block">Devika Rastogi</span>
+                <span class="text-xs text-primary/60">Coffee Enthusiast • Jindal Hub</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 4 -->
+          <div class="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 p-8 rounded-card bg-white border border-borderMuted shadow-subtle flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="flex text-terracotta">
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+              </div>
+              <p class="text-sm text-primary/80 italic leading-relaxed">
+                "As someone who works remotely, finding a cafe with warm natural light, comfortable armchairs, and world-class pour overs is rare. Aura &amp; Bean is a true sanctuary."
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 border-t border-borderMuted/40">
+              <div class="w-11 h-11 rounded-full bg-cream-200 text-primary flex items-center justify-center font-serif text-lg font-bold">
+                K
+              </div>
+              <div>
+                <span class="text-sm font-bold text-primary block">Kabir Anand</span>
+                <span class="text-xs text-primary/60">Independent Author &amp; Researcher</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 5 -->
+          <div class="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 p-8 rounded-card bg-white border border-borderMuted shadow-subtle flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="flex text-terracotta">
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+                <span class="material-symbols-outlined text-[18px] icon-fill">star</span>
+              </div>
+              <p class="text-sm text-primary/80 italic leading-relaxed">
+                "The Pistachio Rose Cruffin and Ceremonial Matcha Cloud make the most heavenly pairing. The design, the acoustic calm, the ceramic cups—everything is deeply considered."
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 border-t border-borderMuted/40">
+              <div class="w-11 h-11 rounded-full bg-terracotta-light text-terracotta flex items-center justify-center font-serif text-lg font-bold">
+                T
+              </div>
+              <div>
+                <span class="text-sm font-bold text-primary block">Tara Deshmukh</span>
+                <span class="text-xs text-primary/60">Interior Stylist</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Carousel Dot Indicators -->
+      <div class="flex items-center justify-center gap-2 mt-8" id="carousel-dots">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 7. LOCATION, HOURS & INTERACTIVE MAP SECTION -->
+  <!-- ========================================================================= -->
+  <section class="w-full py-28 bg-background scroll-mt-20" id="location">
+    <div class="max-w-[1360px] mx-auto px-6 lg:px-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Left: Address, Hours, Directions & Newsletter -->
+        <div class="lg:col-span-6 space-y-8">
+          <div>
+            <span class="text-xs uppercase tracking-widest text-terracotta font-bold">Visit Our Sanctuary</span>
+            <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-primary font-bold tracking-tight mt-2">Find Your Peaceful Corner</h2>
+            <p class="text-sm sm:text-base text-primary/70 mt-3 leading-relaxed">
+              Nestled near the vibrant academic and cultural corridor of Sonipat, offering a serene green retreat from daily rush.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            
+            <!-- Address Card -->
+            <div class="p-6 rounded-card bg-cream-100 border border-borderMuted space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-terracotta-light flex items-center justify-center text-terracotta">
+                <span class="material-symbols-outlined text-[22px]">pin_drop</span>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-primary">Our Sanctuary</h3>
+              <p class="text-xs text-primary/75 leading-relaxed">
+                Plot 42, Sector 14, Sonipat,<br/>
+                Haryana 131001, India<br/>
+                <span class="text-terracotta font-medium">(Near Ashoka Univ &amp; Jindal Hub)</span>
+              </p>
+              <div class="pt-2 text-xs text-primary/75 space-y-1.5">
+                <p class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[16px] text-terracotta">call</span>
+                  <span>+91 98765 43210</span>
+                </p>
+                <p class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[16px] text-terracotta">mail</span>
+                  <span>hello@auraandbean.coffee</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Operating Hours Card -->
+            <div class="p-6 rounded-card bg-cream-100 border border-borderMuted space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-sage-light flex items-center justify-center text-sage-dark">
+                <span class="material-symbols-outlined text-[22px]">schedule</span>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-primary">Sanctuary Hours</h3>
+              <div class="space-y-2 text-xs text-primary/75" id="hours-list">
+                <div class="flex justify-between items-center pb-1 border-b border-borderMuted/40" id="hours-weekday">
+                  <span>Mon – Fri</span>
+                  <span class="font-semibold text-primary">7:00 AM – 9:00 PM</span>
+                </div>
+                <div class="flex justify-between items-center pb-1 border-b border-borderMuted/40" id="hours-weekend">
+                  <span>Sat – Sun</span>
+                  <span class="font-semibold text-primary">8:00 AM – 10:00 PM</span>
+                </div>
+                <div class="flex items-center gap-2 pt-1 text-sage-dark font-medium text-[11px]">
+                  <span class="w-2 h-2 rounded-full bg-sage"></span>
+                  <span>Kitchen closes 45 min before closing</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Directions CTAs -->
+          <div class="flex flex-wrap gap-4 pt-1">
+            <a href="https://maps.google.com/?q=Sector+14+Sonipat+Haryana" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-btn bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-all shadow-sm">
+              <span class="material-symbols-outlined text-[18px]">directions</span>
+              <span>Get Directions</span>
+            </a>
+            <button onclick="openReserveModal()" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-btn bg-terracotta text-white text-sm font-semibold hover:bg-terracotta-hover transition-all shadow-sm">
+              <span class="material-symbols-outlined text-[18px]">event_seat</span>
+              <span>Reserve Table for Later</span>
+            </button>
+          </div>
+
+          <!-- Newsletter Signup Card -->
+          <div class="p-6 rounded-card bg-white border border-borderMuted shadow-subtle space-y-3" id="contact">
+            <h4 class="font-serif text-xl font-bold text-primary">Join the Coffee Circle</h4>
+            <p class="text-xs text-primary/70 leading-relaxed">
+              Receive seasonal harvest drops, home barista extraction guides, and private invitations to monthly Saturday cupping sessions.
+            </p>
+            <form onsubmit="handleNewsletterSubmit(event)" class="flex flex-col sm:flex-row gap-2 pt-1">
+              <input type="email" required placeholder="Enter your email address" class="flex-1 px-4 py-2.5 rounded-btn bg-cream-50 border border-borderMuted text-xs text-primary placeholder:text-primary/40 focus:outline-none focus:ring-2 focus:ring-terracotta"/>
+              <button type="submit" class="px-6 py-2.5 rounded-btn bg-terracotta text-white text-xs font-semibold hover:bg-terracotta-hover transition-colors shrink-0 shadow-sm">
+                Join Circle
+              </button>
+            </form>
+            <div id="newsletter-success" class="hidden text-xs text-sage-dark font-semibold pt-1 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[16px]">check_circle</span>
+              <span>Thank you! Welcome to The Slow Journal community.</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Interactive Map Card -->
+        <div class="lg:col-span-6 w-full">
+          <div class="relative w-full h-[540px] rounded-3xl overflow-hidden shadow-elevated border border-borderMuted bg-cream-200">
+            <!-- Map background visual -->
+            <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBM7mSPZW-um9X0XeCZRLjaM7hQ3rEPU273nrxYtVKV2rTrgCrvduo1lM5l-xKKqOBP00qEwPlAaBAQgqjDEigfk9NxYoSr-zlM8KP6q19831OC1sfpQaNQfu6CNb_QQmHDdIu2R7reql3AvoD3l03MKwiDoR7XvS5a67sgq-nhsuqqBV0aRkk-4IdO8utmxrPJd02f30fkPV-L3oDJkkVtBJFHA3KLzApdPSHWyzY');"></div>
+
+            <!-- Stylized Floating Pin Badge -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+              <div class="relative flex items-center justify-center">
+                <span class="animate-ping absolute inline-flex h-12 w-12 rounded-full bg-terracotta opacity-40"></span>
+                <div class="relative w-12 h-12 rounded-full bg-terracotta text-white flex items-center justify-center shadow-xl border-2 border-white">
+                  <span class="material-symbols-outlined text-[24px]">coffee</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Card at Bottom -->
+            <div class="absolute bottom-6 left-6 right-6 p-5 rounded-2xl bg-white/95 backdrop-blur-md shadow-elevated border border-borderMuted flex items-center justify-between gap-4">
+              <div class="flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-xl bg-primary text-white flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-[22px] text-terracotta-container">storefront</span>
+                </div>
+                <div>
+                  <h4 class="font-serif text-lg font-bold text-primary leading-tight">Aura &amp; Bean Roastery</h4>
+                  <p class="text-xs text-primary/70">Sector 14, Sonipat • Valet &amp; Bicycle Racks Available</p>
+                </div>
+              </div>
+              <a href="https://maps.google.com/?q=Sector+14+Sonipat+Haryana" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-cream-100 hover:bg-terracotta hover:text-white transition-colors text-primary shrink-0" title="Open in Google Maps">
+                <span class="material-symbols-outlined text-[20px]">near_me</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 8. TABLE RESERVATION MODAL -->
+  <!-- ========================================================================= -->
+  <div id="reserve-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="reserve-modal-card" class="relative w-full max-w-lg bg-white rounded-3xl p-6 sm:p-8 shadow-2xl transition-all scale-95 transform max-h-[90vh] overflow-y-auto border border-borderMuted">
+      
+      <!-- Close button -->
+      <button onclick="closeReserveModal()" class="absolute top-5 right-5 p-2 rounded-full hover:bg-cream-100 text-primary/70 hover:text-primary transition-colors" aria-label="Close reservation modal">
+        <span class="material-symbols-outlined text-[22px]">close</span>
+      </button>
+
+      <!-- Form View -->
+      <div id="reservation-form-container">
+        <div class="space-y-2 mb-6">
+          <span class="text-xs uppercase tracking-widest text-terracotta font-bold">Reserve Your Table</span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-primary">Mindful Seating Request</h3>
+          <p class="text-xs text-primary/70">Book ahead to ensure uninterrupted morning work or intimate evening conversation.</p>
+        </div>
+
+        <form onsubmit="handleReservationSubmit(event)" class="space-y-4">
+          <div class="space-y-1">
+            <label class="text-xs uppercase tracking-wider text-primary font-bold block">Full Name</label>
+            <input type="text" required placeholder="e.g. Maya Sharma" class="w-full px-4 py-2.5 rounded-btn bg-cream-50 border border-borderMuted text-xs text-primary focus:outline-none focus:ring-2 focus:ring-terracotta"/>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label class="text-xs uppercase tracking-wider text-primary font-bold block">Phone Number</label>
+              <input type="tel" required placeholder="+91 98765 00000" class="w-full px-4 py-2.5 rounded-btn bg-cream-50 border border-borderMuted text-xs text-primary focus:outline-none focus:ring-2 focus:ring-terracotta"/>
+            </div>
+            <div class="space-y-1">
+              <label class="text-xs uppercase tracking-wider text-primary font-bold block">Guests</label>
+              <select class="w-full px-4 py-2.5 rounded-btn bg-cream-50 border border-borderMuted text-xs text-primary focus:outline-none focus:ring-2 focus:ring-terracotta">
+                <option value="1">1 Person (Quiet Solo)</option>
+                <option value="2" selected>2 Guests</option>
+                <option value="3">3 - 4 Guests</option>
+                <option value="5">5+ (Harvest Table)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label class="text-xs uppercase tracking-wider text-primary font-bold block">Seating Atmosphere</label>
+              <select class="w-full px-4 py-2.5 rounded-btn bg-cream-50 border border-borderMuted text-xs text-primary focus:outline-none focus:ring-2 focus:ring-terracotta">
+                <option value="window">Sunlit Window Nook</option>
+                <option value="brew-bar">Barista Brew Bar</option>
+                <option value="courtyard">Quiet Courtyard</option>
+                <option value="library">Library Harvest Table</option>
+              </select>
+            </div>
+            <div class="space-y-1">
+              <label class="text-xs uppercase tracking-wider text-primary font-bold block">Preferred Time</label>
+              <select class="w-full px-4 py-2.5 rounded-btn bg-cream-50 border border-borderMuted text-xs text-primary focus:outline-none focus:ring-2 focus:ring-terracotta">
+                <option>08:30 AM (Morning Brew)</option>
+                <option>11:00 AM (Brunch Peak)</option>
+                <option>02:00 PM (Afternoon Focus)</option>
+                <option>05:30 PM (Sunset Tasting)</option>
+                <option>07:30 PM (Evening Unwind)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <label class="text-xs uppercase tracking-wider text-primary font-bold block">Date</label>
+            <input type="date" required id="reservation-date-input" class="w-full px-4 py-2.5 rounded-btn bg-cream-50 border border-borderMuted text-xs text-primary focus:outline-none focus:ring-2 focus:ring-terracotta"/>
+          </div>
+
+          <div class="space-y-1">
+            <label class="text-xs uppercase tracking-wider text-primary font-bold block">Special Notes or Dietary Preferences</label>
+            <input type="text" placeholder="e.g. Celebrating anniversary, quiet corner preferred" class="w-full px-4 py-2.5 rounded-btn bg-cream-50 border border-borderMuted text-xs text-primary focus:outline-none focus:ring-2 focus:ring-terracotta"/>
+          </div>
+
+          <button type="submit" class="w-full mt-4 py-3.5 rounded-btn bg-terracotta text-white text-sm font-semibold hover:bg-terracotta-hover transition-all shadow-md">
+            Confirm Reservation
+          </button>
+        </form>
+      </div>
+
+      <!-- Success Confirmation State -->
+      <div id="reservation-success-state" class="hidden text-center py-8 space-y-4">
+        <div class="w-16 h-16 rounded-full bg-sage-light text-sage-dark flex items-center justify-center mx-auto shadow-sm">
+          <span class="material-symbols-outlined text-[36px]">check_circle</span>
+        </div>
+        <h4 class="font-serif text-2xl font-bold text-primary">Your Table is Reserved</h4>
+        <div class="p-4 rounded-xl bg-cream-50 border border-borderMuted text-xs space-y-1.5 text-primary/80 max-w-sm mx-auto">
+          <p><strong class="text-primary">Reservation Code:</strong> <span id="res-code" class="text-terracotta font-mono font-bold">AB-2026-8812</span></p>
+          <p>We have reserved your seat. A confirmation text message and calendar reminder have been prepared.</p>
+        </div>
+        <button onclick="closeReserveModal()" class="px-6 py-2.5 rounded-btn bg-primary text-white text-xs font-semibold hover:bg-primary/90 transition-colors">
+          Return to Sanctuary
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- 9. FLOATING ORDER CART DOCK & SLIDE-OVER DRAWER -->
+  <!-- ========================================================================= -->
+  <!-- Floating Cart Dock Bubble -->
+  <div class="fixed bottom-6 right-6 z-30" id="cart-bubble">
+    <button onclick="toggleCartDrawer()" class="group flex items-center gap-3 px-5 py-3 rounded-full bg-primary text-white shadow-elevated hover:scale-105 active:scale-95 transition-all border border-primary/20" aria-label="Open Cart">
+      <span class="material-symbols-outlined text-[20px] text-terracotta-container">local_mall</span>
+      <span class="text-sm font-semibold">Cart</span>
+      <span id="cart-float-badge" class="px-2 py-0.5 rounded-full bg-terracotta text-white text-xs font-bold">0</span>
+    </button>
+  </div>
+
+  <!-- Cart Slide-Over Drawer -->
+  <div id="cart-drawer-backdrop" class="fixed inset-0 z-50 bg-primary/50 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-300" onclick="toggleCartDrawer()"></div>
+  <div id="cart-drawer-panel" class="fixed top-0 right-0 z-50 w-full max-w-md h-full bg-white p-6 shadow-2xl translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between">
+    
+    <!-- Drawer Top -->
+    <div>
+      <div class="flex items-center justify-between pb-4 mb-4 border-b border-borderMuted">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-[22px] text-terracotta">local_cafe</span>
+          <h3 class="font-serif text-xl font-bold text-primary">Your Order</h3>
+        </div>
+        <button onclick="toggleCartDrawer()" class="p-2 rounded-full hover:bg-cream-100 text-primary/70 hover:text-primary transition-colors" aria-label="Close cart">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Order Type Selector (Dine-in / Takeaway) -->
+      <div class="flex items-center gap-2 p-1 bg-cream-100 rounded-btn mb-4 text-xs font-semibold">
+        <button onclick="setOrderType('dine-in')" id="type-dine" class="flex-1 py-1.5 rounded-btn bg-white text-primary shadow-sm text-center">Dine-in</button>
+        <button onclick="setOrderType('takeaway')" id="type-take" class="flex-1 py-1.5 rounded-btn text-primary/60 hover:text-primary text-center">Takeaway</button>
+        <button onclick="setOrderType('curbside')" id="type-curb" class="flex-1 py-1.5 rounded-btn text-primary/60 hover:text-primary text-center">Curbside</button>
+      </div>
+
+      <!-- Items List Container -->
+      <div id="cart-items-container" class="space-y-3 max-h-[50vh] overflow-y-auto pr-1">
+        <!-- Empty Message -->
+        <div id="cart-empty-message" class="text-center py-16 text-primary/60 text-xs">
+          <span class="material-symbols-outlined text-[42px] text-primary/30 mb-2 block">shopping_bag</span>
+          Your cup is currently empty.<br/>Explore our seasonal coffee and fresh bakery items.
+        </div>
+      </div>
+    </div>
+
+    <!-- Drawer Checkout Bottom -->
+    <div class="pt-6 border-t border-borderMuted space-y-4">
+      <div class="space-y-1.5 text-xs text-primary/70">
+        <div class="flex justify-between items-center">
+          <span>Subtotal:</span>
+          <span id="cart-subtotal" class="font-bold text-base text-primary font-serif">$0.00</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span>Artisanal Roast Tariff &amp; Tax:</span>
+          <span id="cart-tax">$0.00</span>
+        </div>
+        <div class="flex justify-between items-center text-sm font-bold text-primary pt-2 border-t border-borderMuted/60">
+          <span>Estimated Total:</span>
+          <span id="cart-total" class="text-lg text-terracotta font-serif">$0.00</span>
+        </div>
+      </div>
+
+      <button id="checkout-btn" onclick="openCheckoutModal()" disabled class="w-full py-3.5 rounded-btn bg-terracotta text-white text-sm font-semibold hover:bg-terracotta-hover disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md">
+        Proceed to Order Confirmation
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- 10. ITEM QUICK VIEW MODAL -->
+  <!-- ========================================================================= -->
+  <div id="quickview-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="relative w-full max-w-xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-borderMuted">
+      <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/80 transition-colors">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2">
+        <div class="relative h-64 sm:h-auto bg-cream-200">
+          <img id="qv-image" src="" alt="" class="w-full h-full object-cover"/>
+        </div>
+        <div class="p-6 flex flex-col justify-between space-y-4">
+          <div class="space-y-2">
+            <div id="qv-badges" class="flex flex-wrap gap-1.5"></div>
+            <h3 id="qv-title" class="font-serif text-xl font-bold text-primary"></h3>
+            <span id="qv-price" class="text-lg font-bold text-terracotta font-serif block"></span>
+            <p id="qv-desc" class="text-xs text-primary/75 leading-relaxed"></p>
+            <div class="pt-2 border-t border-borderMuted/60 space-y-1 text-[11px] text-primary/60">
+              <p><strong class="text-primary font-medium">Brew Technique:</strong> <span id="qv-technique"></span></p>
+              <p><strong class="text-primary font-medium">Terroir / Sourcing:</strong> <span id="qv-terroir"></span></p>
+            </div>
+          </div>
+
+          <button id="qv-add-btn" class="w-full py-3 rounded-btn bg-terracotta text-white text-xs font-semibold hover:bg-terracotta-hover transition-colors shadow-sm flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-[16px]">add_shopping_cart</span>
+            <span>Add to Order</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- 11. BENTO GALLERY LIGHTBOX VIEWER -->
+  <!-- ========================================================================= -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary/90 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+    <button onclick="closeLightbox()" class="absolute top-6 right-6 z-10 p-2.5 rounded-full bg-white/20 hover:bg-white/40 text-white transition-colors" aria-label="Close Lightbox">
+      <span class="material-symbols-outlined text-[24px]">close</span>
+    </button>
+    
+    <div class="relative max-w-4xl w-full max-h-[85vh] flex flex-col items-center">
+      <img id="lightbox-image" src="" alt="" class="max-h-[70vh] w-auto rounded-2xl object-contain shadow-2xl"/>
+      <div class="text-center mt-4 text-white space-y-1 max-w-lg">
+        <h4 id="lightbox-title" class="font-serif text-2xl font-bold"></h4>
+        <p id="lightbox-desc" class="text-xs text-cream-200 font-light"></p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- 12. CHECKOUT ORDER RECEIPT CONFIRMATION MODAL -->
+  <!-- ========================================================================= -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="relative w-full max-w-md bg-white rounded-3xl p-6 sm:p-8 shadow-2xl text-center space-y-5 border border-borderMuted">
+      <div class="w-16 h-16 rounded-full bg-sage-light text-sage-dark flex items-center justify-center mx-auto">
+        <span class="material-symbols-outlined text-[36px]">receipt_long</span>
+      </div>
+      <div>
+        <h3 class="font-serif text-2xl font-bold text-primary">Order Received</h3>
+        <p class="text-xs text-primary/70 mt-1">Our master barista is preparing your handcrafted roast selection.</p>
+      </div>
+      
+      <div class="p-4 rounded-xl bg-cream-50 border border-borderMuted text-xs text-left space-y-2 text-primary/80">
+        <div class="flex justify-between">
+          <span class="text-primary/60">Order Token:</span>
+          <span id="order-token" class="font-mono font-bold text-terracotta">#AB-7749</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-primary/60">Service Mode:</span>
+          <span id="order-mode-display" class="font-semibold text-primary">Dine-in</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-primary/60">Estimated Prep Time:</span>
+          <span class="font-semibold text-primary">8 - 12 Minutes</span>
+        </div>
+      </div>
+
+      <button onclick="closeCheckoutModal()" class="w-full py-3 rounded-btn bg-primary text-white text-xs font-semibold hover:bg-primary/90 transition-colors">
+        Done &amp; Close
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- 13. TOAST NOTIFICATION CONTAINER -->
+  <!-- ========================================================================= -->
+  <div id="toast-container" class="fixed bottom-6 left-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+
+  <!-- ========================================================================= -->
+  <!-- 14. FOOTER -->
+  <!-- ========================================================================= -->
+  <footer class="w-full bg-primary text-cream-200 pt-16 pb-12 border-t border-primary/40">
+    <div class="max-w-[1360px] mx-auto px-6 lg:px-10">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
+        
+        <!-- Brand Narrative Col -->
+        <div class="lg:col-span-4 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-terracotta-container">
+              <span class="material-symbols-outlined text-[18px]">coffee</span>
+            </div>
+            <span class="font-serif text-2xl font-bold text-white tracking-tight">Aura &amp; Bean</span>
+          </div>
+          <p class="text-xs text-cream-300/80 leading-relaxed max-w-sm">
+            An artisanal sanctuary for mindful coffee appreciation, specialty single-origin micro-lots, and quiet communal warmth in Sonipat, Haryana.
+          </p>
+          <div class="flex items-center gap-3 pt-2 text-cream-300">
+            <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-terracotta hover:text-white transition-colors" aria-label="Instagram">
+              <span class="material-symbols-outlined text-[16px]">photo_camera</span>
+            </a>
+            <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-terracotta hover:text-white transition-colors" aria-label="Map location">
+              <span class="material-symbols-outlined text-[16px]">pin_drop</span>
+            </a>
+            <a href="mailto:hello@auraandbean.coffee" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-terracotta hover:text-white transition-colors" aria-label="Email">
+              <span class="material-symbols-outlined text-[16px]">mail</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Rituals Nav Links -->
+        <div class="lg:col-span-2 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-white block">Rituals</span>
+          <ul class="space-y-2 text-xs text-cream-300/80">
+            <li><a href="#menu" class="hover:text-white transition-colors">Seasonal Pour-Over</a></li>
+            <li><a href="#menu" class="hover:text-white transition-colors">Cold Drip Extraction</a></li>
+            <li><a href="#menu" class="hover:text-white transition-colors">Ceremonial Matcha</a></li>
+            <li><a href="#menu" class="hover:text-white transition-colors">Sourdough Bakery</a></li>
+          </ul>
+        </div>
+
+        <!-- Sanctuary Nav Links -->
+        <div class="lg:col-span-2 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-white block">Sanctuary</span>
+          <ul class="space-y-2 text-xs text-cream-300/80">
+            <li><a href="#location" class="hover:text-white transition-colors">Sector 14, Sonipat</a></li>
+            <li><a href="#location" class="hover:text-white transition-colors">7:00 AM – 9:00 PM</a></li>
+            <li><a href="#atmosphere" class="hover:text-white transition-colors">Saturday Cuppings</a></li>
+            <li><button onclick="openReserveModal()" class="hover:text-white transition-colors text-left">Book Seating</button></li>
+          </ul>
+        </div>
+
+        <!-- The Slow Journal Col -->
+        <div class="lg:col-span-4 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-white block">The Slow Journal</span>
+          <p class="text-xs text-cream-300/80 leading-relaxed">
+            Receive seasonal coffee harvest dispatches, brewing guides, and invitations to intimate evening tastings.
+          </p>
+          <form onsubmit="handleNewsletterSubmit(event)" class="flex gap-2 pt-1">
+            <input type="email" required placeholder="Enter your email" class="flex-1 px-3.5 py-2 rounded-btn bg-white/10 border border-white/20 text-xs text-white placeholder:text-cream-300/50 focus:outline-none focus:ring-1 focus:ring-terracotta"/>
+            <button type="submit" class="px-5 py-2 rounded-btn bg-terracotta text-white text-xs font-semibold hover:bg-terracotta-hover transition-colors">
+              Subscribe
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Copyright & Bottom Policy Links -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-cream-300/60">
+        <p>© 2026 Aura &amp; Bean Specialty Coffee Roasters. All rights reserved.</p>
+        <div class="flex items-center gap-6">
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-white transition-colors">Ethical Direct Trade</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ========================================================================= -->
+  <!-- 15. JAVASCRIPT LOGIC (Menu, Cart, Modals, Carousel, Real-time Clock) -->
+  <!-- ========================================================================= -->
+  <script>
+    // -------------------------------------------------------------
+    // A. Cart State & Quantity Logic
+    // -------------------------------------------------------------
+    let cart = [];
+    let currentOrderType = 'dine-in';
+
+    function addToCart(title, price) {
+      const existing = cart.find(item => item.title === title);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ title, price, qty: 1 });
+      }
+      updateCartUI();
+      showToast(`Added "${title}" to your order`);
+    }
+
+    function changeQty(index, delta) {
+      if (!cart[index]) return;
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const navBadge = document.getElementById('nav-cart-badge');
+      const floatBadge = document.getElementById('cart-float-badge');
+      const container = document.getElementById('cart-items-container');
+      const emptyMsg = document.getElementById('cart-empty-message');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const taxEl = document.getElementById('cart-tax');
+      const totalEl = document.getElementById('cart-total');
+      const checkoutBtn = document.getElementById('checkout-btn');
+
+      const totalCount = cart.reduce((acc, curr) => acc + curr.qty, 0);
+      const subtotal = cart.reduce((acc, curr) => acc + (curr.qty * curr.price), 0);
+      const tax = subtotal * 0.05; // 5% artisanal local GST
+      const total = subtotal + tax;
+
+      if (navBadge) navBadge.innerText = totalCount;
+      if (floatBadge) floatBadge.innerText = totalCount;
+      if (subtotalEl) subtotalEl.innerText = '$' + subtotal.toFixed(2);
+      if (taxEl) taxEl.innerText = '$' + tax.toFixed(2);
+      if (totalEl) totalEl.innerText = '$' + total.toFixed(2);
+
+      if (cart.length === 0) {
+        container.innerHTML = '';
+        container.appendChild(emptyMsg);
+        emptyMsg.style.display = 'block';
+        if (checkoutBtn) checkoutBtn.disabled = true;
+      } else {
+        emptyMsg.style.display = 'none';
+        if (checkoutBtn) checkoutBtn.disabled = false;
+        container.innerHTML = '';
+
+        cart.forEach((item, idx) => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'flex items-center justify-between p-3.5 rounded-xl bg-cream-50 border border-borderMuted';
+          itemDiv.innerHTML = `
+            <div class="min-w-0 pr-3">
+              <h4 class="font-serif text-sm font-bold text-primary truncate">${item.title}</h4>
+              <span class="text-xs text-terracotta font-semibold">$${(item.price * item.qty).toFixed(2)} <span class="text-primary/50 text-[10px]">($${item.price.toFixed(2)} ea)</span></span>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button onclick="changeQty(${idx}, -1)" class="w-7 h-7 rounded-lg bg-white border border-borderMuted flex items-center justify-center font-bold text-primary hover:border-terracotta hover:text-terracotta transition-colors">-</button>
+              <span class="text-xs font-bold text-primary w-5 text-center">${item.qty}</span>
+              <button onclick="changeQty(${idx}, 1)" class="w-7 h-7 rounded-lg bg-white border border-borderMuted flex items-center justify-center font-bold text-primary hover:border-terracotta hover:text-terracotta transition-colors">+</button>
+            </div>
+          `;
+          container.appendChild(itemDiv);
+        });
+      }
+    }
+
+    function toggleCartDrawer() {
+      const backdrop = document.getElementById('cart-drawer-backdrop');
+      const panel = document.getElementById('cart-drawer-panel');
+      const isOpen = !backdrop.classList.contains('pointer-events-none');
+
+      if (isOpen) {
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+        panel.classList.add('translate-x-full');
+      } else {
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        panel.classList.remove('translate-x-full');
+      }
+    }
+
+    function setOrderType(type) {
+      currentOrderType = type;
+      ['dine', 'take', 'curb'].forEach(k => {
+        const btn = document.getElementById(`type-${k}`);
+        if (!btn) return;
+        btn.className = 'flex-1 py-1.5 rounded-btn text-primary/60 hover:text-primary text-center';
+      });
+      const activeBtn = document.getElementById(`type-${type === 'dine-in' ? 'dine' : type === 'takeaway' ? 'take' : 'curb'}`);
+      if (activeBtn) {
+        activeBtn.className = 'flex-1 py-1.5 rounded-btn bg-white text-primary shadow-sm text-center font-bold';
+      }
+    }
+
+    function openCheckoutModal() {
+      toggleCartDrawer();
+      const modal = document.getElementById('checkout-modal');
+      const modeDisplay = document.getElementById('order-mode-display');
+      const tokenDisplay = document.getElementById('order-token');
+      
+      const randomToken = '#AB-' + Math.floor(1000 + Math.random() * 9000);
+      if (tokenDisplay) tokenDisplay.innerText = randomToken;
+      if (modeDisplay) modeDisplay.innerText = currentOrderType.charAt(0).toUpperCase() + currentOrderType.slice(1);
+      
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      cart = [];
+      updateCartUI();
+    }
+
+    function closeCheckoutModal() {
+      const modal = document.getElementById('checkout-modal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    // -------------------------------------------------------------
+    // B. Mobile Off-Canvas Navigation Toggle
+    // -------------------------------------------------------------
+    function toggleMobileNav() {
+      const backdrop = document.getElementById('mobile-nav-backdrop');
+      const panel = document.getElementById('mobile-nav-panel');
+      const isOpen = !backdrop.classList.contains('pointer-events-none');
+
+      if (isOpen) {
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+        panel.classList.add('translate-x-full');
+      } else {
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        panel.classList.remove('translate-x-full');
+      }
+    }
+
+    // -------------------------------------------------------------
+    // C. Table Reservation Modal Controls
+    // -------------------------------------------------------------
+    function openReserveModal() {
+      const modal = document.getElementById('reserve-modal');
+      const card = document.getElementById('reserve-modal-card');
+      const dateInput = document.getElementById('reservation-date-input');
+      
+      // Set default date to today
+      if (dateInput && !dateInput.value) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.value = today;
+        dateInput.min = today;
+      }
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+    }
+
+    function closeReserveModal() {
+      const modal = document.getElementById('reserve-modal');
+      const card = document.getElementById('reserve-modal-card');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+      setTimeout(() => {
+        document.getElementById('reservation-form-container').classList.remove('hidden');
+        document.getElementById('reservation-success-state').classList.add('hidden');
+      }, 300);
+    }
+
+    function handleReservationSubmit(e) {
+      e.preventDefault();
+      const codeSpan = document.getElementById('res-code');
+      if (codeSpan) {
+        codeSpan.innerText = 'AB-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+      }
+      document.getElementById('reservation-form-container').classList.add('hidden');
+      document.getElementById('reservation-success-state').classList.remove('hidden');
+      showToast('Reservation submitted successfully!');
+    }
+
+    // -------------------------------------------------------------
+    // D. Menu Category & Dietary Filter Logic
+    // -------------------------------------------------------------
+    let currentCategory = 'all';
+    let currentDietary = 'all';
+
+    function filterMenu(category, clickedBtn) {
+      currentCategory = category;
+      const buttons = document.querySelectorAll('.menu-filter-btn');
+      buttons.forEach(btn => {
+        btn.className = 'menu-filter-btn px-6 py-2.5 rounded-full bg-white border border-borderMuted text-primary/80 text-sm font-semibold hover:border-terracotta/40 hover:text-primary transition-all whitespace-nowrap';
+      });
+      clickedBtn.className = 'menu-filter-btn px-6 py-2.5 rounded-full bg-primary text-white text-sm font-semibold shadow-sm transition-all whitespace-nowrap active-category';
+
+      applyMenuFilters();
+    }
+
+    function filterDietary(diet) {
+      currentDietary = diet;
+      document.querySelectorAll('.dietary-filter-pill').forEach(btn => {
+        if (btn.getAttribute('data-diet') === diet) {
+          btn.classList.add('ring-2', 'ring-terracotta');
+        } else {
+          btn.classList.remove('ring-2', 'ring-terracotta');
+        }
+      });
+      applyMenuFilters();
+    }
+
+    function applyMenuFilters() {
+      const cards = document.querySelectorAll('.menu-item-card');
+      cards.forEach(card => {
+        const itemCat = card.getAttribute('data-category');
+        const itemDiet = card.getAttribute('data-diet') || '';
+
+        const matchesCat = (currentCategory === 'all' || itemCat === currentCategory);
+        const matchesDiet = (currentDietary === 'all' || itemDiet.includes(currentDietary));
+
+        if (matchesCat && matchesDiet) {
+          card.style.display = 'flex';
+          card.style.opacity = '0';
+          setTimeout(() => {
+            card.style.opacity = '1';
+          }, 30);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // -------------------------------------------------------------
+    // E. Item Quick View Modal
+    // -------------------------------------------------------------
+    let activeQuickViewItem = null;
+
+    function openItemQuickView(title, price, desc, imgSrc, technique, terroir, badges) {
+      activeQuickViewItem = { title, price: parseFloat(price.replace('$', '')) };
+      document.getElementById('qv-title').innerText = title;
+      document.getElementById('qv-price').innerText = price;
+      document.getElementById('qv-desc').innerText = desc;
+      document.getElementById('qv-image').src = imgSrc;
+      document.getElementById('qv-technique').innerText = technique;
+      document.getElementById('qv-terroir').innerText = terroir;
+
+      const badgesContainer = document.getElementById('qv-badges');
+      badgesContainer.innerHTML = '';
+      badges.forEach(b => {
+        const badgeSpan = document.createElement('span');
+        badgeSpan.className = 'px-2 py-0.5 rounded-full bg-cream-200 text-primary/80 text-[10px] font-semibold';
+        badgeSpan.innerText = b;
+        badgesContainer.appendChild(badgeSpan);
+      });
+
+      const addBtn = document.getElementById('qv-add-btn');
+      addBtn.onclick = () => {
+        addToCart(activeQuickViewItem.title, activeQuickViewItem.price);
+        closeQuickView();
+      };
+
+      const modal = document.getElementById('quickview-modal');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function closeQuickView() {
+      const modal = document.getElementById('quickview-modal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    // -------------------------------------------------------------
+    // F. Bento Lightbox Controls
+    // -------------------------------------------------------------
+    function openLightbox(imgSrc, title, desc) {
+      document.getElementById('lightbox-image').src = imgSrc;
+      document.getElementById('lightbox-title').innerText = title;
+      document.getElementById('lightbox-desc').innerText = desc;
+      
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    // -------------------------------------------------------------
+    // G. Interactive Roast Profile Bar
+    // -------------------------------------------------------------
+    function setRoastProfile(percent, description) {
+      const bar = document.getElementById('roast-progress-bar');
+      const label = document.getElementById('roast-profile-label');
+      const desc = document.getElementById('roast-description');
+
+      if (bar) bar.style.width = percent + '%';
+      if (label) label.innerText = description;
+      if (desc) {
+        if (percent <= 30) {
+          desc.innerText = "Highest floral terpenes, bright bergamot acidity, delicate tea-like body. Optimal for V60 pour-overs.";
+        } else if (percent <= 55) {
+          desc.innerText = "The signature Aura & Bean sweetspot: caramelized Meyer lemon, candied peach, smooth sugarcane sweetness.";
+        } else if (percent <= 80) {
+          desc.innerText = "Rich toasted hazelnut, baked apple, wildflower honey, velvety medium density for espresso and cortados.";
+        } else {
+          desc.innerText = "Deep 70% dark chocolate cacao nibs, roasted macadamia, and low-acid lingering velvety crema.";
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // H. Customer Reviews Carousel
+    // -------------------------------------------------------------
+    let currentReviewIndex = 0;
+    let reviewAutoPlayTimer = null;
+    const totalReviews = 5;
+
+    function getVisibleCardCount() {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 768) return 2;
+      return 1;
+    }
+
+    function updateCarousel() {
+      const track = document.getElementById('reviews-track');
+      const visible = getVisibleCardCount();
+      const maxIndex = Math.max(0, totalReviews - visible);
+
+      if (currentReviewIndex > maxIndex) currentReviewIndex = 0;
+      if (currentReviewIndex < 0) currentReviewIndex = maxIndex;
+
+      const cardPercent = 100 / visible;
+      // Gap compensation roughly (24px)
+      const offset = currentReviewIndex * (cardPercent + 2);
+      track.style.transform = `translateX(-${offset}%)`;
+
+      renderCarouselDots(maxIndex);
+    }
+
+    function nextReview() {
+      const visible = getVisibleCardCount();
+      const maxIndex = Math.max(0, totalReviews - visible);
+      currentReviewIndex = (currentReviewIndex >= maxIndex) ? 0 : currentReviewIndex + 1;
+      updateCarousel();
+    }
+
+    function prevReview() {
+      const visible = getVisibleCardCount();
+      const maxIndex = Math.max(0, totalReviews - visible);
+      currentReviewIndex = (currentReviewIndex <= 0) ? maxIndex : currentReviewIndex - 1;
+      updateCarousel();
+    }
+
+    function renderCarouselDots(maxIndex) {
+      const dotsContainer = document.getElementById('carousel-dots');
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+
+      for (let i = 0; i <= maxIndex; i++) {
+        const dot = document.createElement('button');
+        dot.className = `w-2.5 h-2.5 rounded-full transition-all ${i === currentReviewIndex ? 'bg-terracotta w-6' : 'bg-borderMuted hover:bg-terracotta/40'}`;
+        dot.setAttribute('aria-label', `Go to review slide ${i + 1}`);
+        dot.onclick = () => {
+          currentReviewIndex = i;
+          updateCarousel();
+        };
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function startReviewAutoPlay() {
+      if (reviewAutoPlayTimer) clearInterval(reviewAutoPlayTimer);
+      reviewAutoPlayTimer = setInterval(nextReview, 4500);
+    }
+
+    function pauseReviewAutoPlay() {
+      if (reviewAutoPlayTimer) clearInterval(reviewAutoPlayTimer);
+    }
+
+    window.addEventListener('resize', updateCarousel);
+
+    // -------------------------------------------------------------
+    // I. Newsletter & Toast Engine
+    // -------------------------------------------------------------
+    function handleNewsletterSubmit(e) {
+      e.preventDefault();
+      const successMsg = document.getElementById('newsletter-success');
+      if (successMsg) successMsg.classList.remove('hidden');
+      e.target.reset();
+      showToast('Thank you! Welcome to The Slow Journal community.');
+    }
+
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = 'pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-xl bg-primary text-white text-xs shadow-elevated border border-white/10 transition-all duration-300 transform translate-y-4 opacity-0';
+      toast.innerHTML = `
+        <span class="material-symbols-outlined text-[18px] text-terracotta-container">check_circle</span>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-4', 'opacity-0');
+      }, 20);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // -------------------------------------------------------------
+    // J. Real-Time Sanctuary Opening Hours Calculator
+    // -------------------------------------------------------------
+    function updateSanctuaryStatus() {
+      const now = new Date();
+      const day = now.getDay(); // 0 is Sunday, 6 is Saturday
+      const hour = now.getHours();
+      const minutes = now.getMinutes();
+      const timeDecimal = hour + minutes / 60;
+
+      const isWeekend = (day === 0 || day === 6);
+      const openHour = isWeekend ? 8 : 7;
+      const closeHour = isWeekend ? 22 : 21;
+
+      const isOpen = (timeDecimal >= openHour && timeDecimal < closeHour);
+
+      const navStatusEl = document.getElementById('nav-live-status');
+      const mobileStatusEl = document.getElementById('mobile-live-status');
+
+      const closingTimeStr = isWeekend ? '10 PM' : '9 PM';
+
+      if (isOpen) {
+        if (navStatusEl) navStatusEl.innerText = `Open • Closes at ${closingTimeStr}`;
+        if (mobileStatusEl) mobileStatusEl.innerText = `Open Today • Closes at ${closingTimeStr}`;
+      } else {
+        if (navStatusEl) navStatusEl.innerText = `Currently Closed • Opens at ${openHour} AM`;
+        if (mobileStatusEl) mobileStatusEl.innerText = `Currently Closed • Opens at ${openHour} AM`;
+      }
+
+      // Highlight active hours row
+      const weekdayRow = document.getElementById('hours-weekday');
+      const weekendRow = document.getElementById('hours-weekend');
+      if (weekdayRow && weekendRow) {
+        if (isWeekend) {
+          weekendRow.classList.add('text-terracotta', 'font-bold');
+        } else {
+          weekdayRow.classList.add('text-terracotta', 'font-bold');
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // K. Escape Key Listener & Init
+    // -------------------------------------------------------------
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeReserveModal();
+        closeQuickView();
+        closeLightbox();
+        closeCheckoutModal();
+        const cartBackdrop = document.getElementById('cart-drawer-backdrop');
+        if (cartBackdrop && !cartBackdrop.classList.contains('pointer-events-none')) {
+          toggleCartDrawer();
+        }
+        const mobileBackdrop = document.getElementById('mobile-nav-backdrop');
+        if (mobileBackdrop && !mobileBackdrop.classList.contains('pointer-events-none')) {
+          toggleMobileNav();
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartUI();
+      updateCarousel();
+      startReviewAutoPlay();
+      updateSanctuaryStatus();
+      setInterval(updateSanctuaryStatus, 60000); // Check every minute
+    });
+  </script>
+
+</body>
+</html>
